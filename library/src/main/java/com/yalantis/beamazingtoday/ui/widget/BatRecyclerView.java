@@ -1,18 +1,17 @@
 package com.yalantis.beamazingtoday.ui.widget;
 
 import android.content.Context;
-import android.os.Handler;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 
+import com.yalantis.beamazingtoday.Constant;
+import com.yalantis.beamazingtoday.R;
 import com.yalantis.beamazingtoday.R2;
 import com.yalantis.beamazingtoday.listeners.AddItemListener;
 import com.yalantis.beamazingtoday.listeners.AnimationListener;
-import com.yalantis.beamazingtoday.Constant;
-import com.yalantis.beamazingtoday.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,6 +51,14 @@ public class BatRecyclerView extends FrameLayout {
         mHeaderView.setAddItemListener(listener);
     }
 
+    public void revertAnimation() {
+        mHeaderView.animateDecreasing();
+    }
+
+    public RecyclerView getView() {
+        return mRecyclerView;
+    }
+
     class AnimationListenerImpl implements AnimationListener {
         @Override
         public void onIncreaseAnimationStarted() {
@@ -67,15 +74,7 @@ public class BatRecyclerView extends FrameLayout {
         @Override
         public void onAddAnimationStarted() {
             ViewCompat.animate(mRecyclerView).translationY(0).setDuration(0).start();
-            mRecyclerView.smoothScrollToPosition(0);
+            mRecyclerView.scrollToPosition(0);
         }
-    }
-
-    public void revertAnimation() {
-        mHeaderView.animateDecreasing();
-    }
-
-    public RecyclerView getView() {
-        return mRecyclerView;
     }
 }

@@ -7,8 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
 import android.view.View;
 
-import com.yalantis.beamazingtoday.ui.adapter.BatAdapter;
 import com.yalantis.beamazingtoday.Constant;
+import com.yalantis.beamazingtoday.ui.adapter.BatAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,17 +17,18 @@ import java.util.List;
  * Created by galata on 28.06.16.
  */
 public class BatItemAnimator extends SimpleItemAnimator {
-    private ArrayList<RecyclerView.ViewHolder> mPendingRemovals = new ArrayList<>();
-    private ArrayList<RecyclerView.ViewHolder> mPendingAdditions = new ArrayList<>();
-    private ArrayList<MoveInfo> mPendingMoves = new ArrayList<>();
-    private ArrayList<ChangeInfo> mPendingChanges = new ArrayList<>();
-    private ArrayList<ArrayList<RecyclerView.ViewHolder>> mAdditionsList = new ArrayList<>();
-    private ArrayList<ArrayList<MoveInfo>> mMovesList = new ArrayList<>();
-    private ArrayList<ArrayList<ChangeInfo>> mChangesList = new ArrayList<>();
-    private ArrayList<RecyclerView.ViewHolder> mAddAnimations = new ArrayList<>();
-    private ArrayList<RecyclerView.ViewHolder> mMoveAnimations = new ArrayList<>();
-    private ArrayList<RecyclerView.ViewHolder> mRemoveAnimations = new ArrayList<>();
-    private ArrayList<RecyclerView.ViewHolder> mChangeAnimations = new ArrayList<>();
+    private static final long ANIM_DURATION = 250;
+    private List<RecyclerView.ViewHolder> mPendingRemovals = new ArrayList<>();
+    private List<RecyclerView.ViewHolder> mPendingAdditions = new ArrayList<>();
+    private List<MoveInfo> mPendingMoves = new ArrayList<>();
+    private List<ChangeInfo> mPendingChanges = new ArrayList<>();
+    private List<ArrayList<RecyclerView.ViewHolder>> mAdditionsList = new ArrayList<>();
+    private List<ArrayList<MoveInfo>> mMovesList = new ArrayList<>();
+    private List<ArrayList<ChangeInfo>> mChangesList = new ArrayList<>();
+    private List<RecyclerView.ViewHolder> mAddAnimations = new ArrayList<>();
+    private List<RecyclerView.ViewHolder> mMoveAnimations = new ArrayList<>();
+    private List<RecyclerView.ViewHolder> mRemoveAnimations = new ArrayList<>();
+    private List<RecyclerView.ViewHolder> mChangeAnimations = new ArrayList<>();
 
     private void animateAddImpl(final BatAdapter.ViewHolder holder) {
         final View view = holder.itemView;
@@ -35,7 +36,7 @@ public class BatItemAnimator extends SimpleItemAnimator {
         view.setAlpha(0);
 
         final ViewPropertyAnimatorCompat animation = ViewCompat.animate(view);
-        animation.setDuration(Constant.ANIM_DURATION_MILLIS).
+        animation.setDuration(ANIM_DURATION).
                 setListener(new VpaListenerAdapter() {
                     @Override
                     public void onAnimationStart(View view) {
@@ -83,12 +84,7 @@ public class BatItemAnimator extends SimpleItemAnimator {
         final View view = holder.itemView;
         final int deltaX = toX - fromX;
         final int deltaY = toY - fromY;
-        if (deltaX != 0) {
-            ViewCompat.animate(view).translationX(0);
-        }
-        if (deltaY != 0) {
-            ViewCompat.animate(view).translationY(0);
-        }
+        ViewCompat.animate(view).translationX(0).translationY(0).start();
         mMoveAnimations.add(holder);
         final ViewPropertyAnimatorCompat animation = ViewCompat.animate(view);
         animation.setDuration(Constant.ANIM_DURATION_MILLIS).setListener(new VpaListenerAdapter() {

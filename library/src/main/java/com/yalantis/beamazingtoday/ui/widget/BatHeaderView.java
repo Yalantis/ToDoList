@@ -5,6 +5,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.AppCompatRadioButton;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
@@ -14,22 +15,18 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
-import com.jakewharton.rxbinding.view.RxView;
 import com.jakewharton.rxbinding.widget.RxTextView;
+import com.yalantis.beamazingtoday.Constant;
+import com.yalantis.beamazingtoday.R;
 import com.yalantis.beamazingtoday.R2;
 import com.yalantis.beamazingtoday.listeners.AddItemListener;
 import com.yalantis.beamazingtoday.listeners.AnimationListener;
 import com.yalantis.beamazingtoday.util.AnimationUtil;
-import com.yalantis.beamazingtoday.Constant;
-import com.yalantis.beamazingtoday.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import rx.Observable;
 import rx.functions.Action1;
-import rx.functions.Func3;
-import rx.internal.util.SubscriptionList;
 
 /**
  * Created by galata on 15.07.16.
@@ -181,7 +178,7 @@ public class BatHeaderView extends FrameLayout {
             mAnimationListener.onAddAnimationStarted();
         }
         ViewCompat.animate(mEditText).translationX(0).setDuration(Constant.ANIM_DURATION_MILLIS).start();
-        ViewCompat.animate(this).scaleX(1).translationY(getHeight() - HEADER_TRANSLATION_Y * 2)
+        ViewCompat.animate(this).scaleX(1).translationY(getHeight() - dpToPx(20))
                 .setInterpolator(new LinearInterpolator())
                 .setDuration(Constant.ANIM_DURATION_MILLIS).withEndAction(new Runnable() {
             @Override
@@ -210,6 +207,11 @@ public class BatHeaderView extends FrameLayout {
                 mRadioButton.startAnimation(animation);
             }
         }).start();
+    }
+
+    public int dpToPx(int dp) {
+        DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
+        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 
     void setAnimationListener(AnimationListener animationListener) {
