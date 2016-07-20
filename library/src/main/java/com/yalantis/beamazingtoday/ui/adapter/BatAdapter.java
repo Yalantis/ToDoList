@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.yalantis.beamazingtoday.R;
 import com.yalantis.beamazingtoday.R2;
 
@@ -23,10 +24,6 @@ public class BatAdapter extends RecyclerView.Adapter<BatAdapter.ViewHolder> {
 
     public BatAdapter(List<String> goals) {
         mItems = goals;
-    }
-
-    public List<String> getItems() {
-        return mItems;
     }
 
     @Override

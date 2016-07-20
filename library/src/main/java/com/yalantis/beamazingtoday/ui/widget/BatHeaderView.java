@@ -14,22 +14,18 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
-import com.jakewharton.rxbinding.view.RxView;
 import com.jakewharton.rxbinding.widget.RxTextView;
+import com.yalantis.beamazingtoday.Constant;
+import com.yalantis.beamazingtoday.R;
 import com.yalantis.beamazingtoday.R2;
 import com.yalantis.beamazingtoday.listeners.AddItemListener;
 import com.yalantis.beamazingtoday.listeners.AnimationListener;
 import com.yalantis.beamazingtoday.util.AnimationUtil;
-import com.yalantis.beamazingtoday.Constant;
-import com.yalantis.beamazingtoday.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import rx.Observable;
 import rx.functions.Action1;
-import rx.functions.Func3;
-import rx.internal.util.SubscriptionList;
 
 /**
  * Created by galata on 15.07.16.
@@ -48,6 +44,8 @@ public class BatHeaderView extends FrameLayout {
     View mRoot;
     @BindView(R2.id.radio_button)
     AppCompatRadioButton mRadioButton;
+    @BindView(R2.id.divider)
+    View mDivider;
 
     private AnimationListener mAnimationListener;
     private AddItemListener mAddItemListener;
@@ -91,6 +89,7 @@ public class BatHeaderView extends FrameLayout {
         mRoot.setBackgroundResource(R.drawable.header_background_rounded);
         ViewCompat.animate(this).scaleX(1.1f).translationY(HEADER_TRANSLATION_Y)
                 .setDuration(Constant.ANIM_DURATION_MILLIS).start();
+        AnimationUtil.hide(mDivider);
         AnimationUtil.scaleXViews(0.9f, mButtonAdd, mEditText);
         AnimationUtil.moveX(mEditText, -mAddView.getWidth(), new Runnable() {
             @Override
@@ -158,6 +157,7 @@ public class BatHeaderView extends FrameLayout {
                     @Override
                     public void run() {
                         setTranslationY(0);
+                        AnimationUtil.show(mDivider);
                         setScaleY(1);
                         mAddView.increase();
                         AnimationUtil.show(mEditText);
