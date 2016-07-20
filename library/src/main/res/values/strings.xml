@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Be awesome today</string>
+    <string name="str_add_goal">Add new goal</string>
+    <string name="str_add">Add</string>
+</resources>
