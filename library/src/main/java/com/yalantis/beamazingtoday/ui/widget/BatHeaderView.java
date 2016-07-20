@@ -5,6 +5,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.AppCompatRadioButton;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
@@ -181,7 +182,7 @@ public class BatHeaderView extends FrameLayout {
             mAnimationListener.onAddAnimationStarted();
         }
         ViewCompat.animate(mEditText).translationX(0).setDuration(Constant.ANIM_DURATION_MILLIS).start();
-        ViewCompat.animate(this).scaleX(1).translationY(getHeight() - HEADER_TRANSLATION_Y * 2)
+        ViewCompat.animate(this).scaleX(1).translationY(getHeight() - dpToPx(20))
                 .setInterpolator(new LinearInterpolator())
                 .setDuration(Constant.ANIM_DURATION_MILLIS).withEndAction(new Runnable() {
             @Override
@@ -210,6 +211,11 @@ public class BatHeaderView extends FrameLayout {
                 mRadioButton.startAnimation(animation);
             }
         }).start();
+    }
+
+    public int dpToPx(int dp) {
+        DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
+        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 
     void setAnimationListener(AnimationListener animationListener) {

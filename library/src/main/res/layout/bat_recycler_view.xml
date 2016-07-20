@@ -6,11 +6,10 @@
     <View
         android:id="@+id/view"
         android:layout_width="@dimen/recycler_view_width"
-        android:layout_marginTop="@dimen/background_view_margin_top"
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/background_view_margin_top"
         android:background="@drawable/recycler_view_background" />
-
 
     <com.yalantis.beamazingtoday.ui.widget.BatHeaderView
         android:id="@+id/header_view"
@@ -22,6 +21,6 @@
         android:id="@+id/recycler_view"
         android:layout_width="@dimen/recycler_view_width"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/recycler_view_margin_top"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/recycler_view_margin_top" />
 </FrameLayout>
