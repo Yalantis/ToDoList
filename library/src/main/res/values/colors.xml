@@ -12,4 +12,5 @@
     <color name="colorTexts">#383939</color>
     <color name="colorButtonDisabled">#EFEFF1</color>
     <color name="colorButtonEnabled">#96CCEB</color>
+    <color name="colorDivider">#EEEEF0</color>
 </resources>
