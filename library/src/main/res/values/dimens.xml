@@ -5,7 +5,7 @@
 
     <dimen name="add_view_size">22dp</dimen>
     <dimen name="cursor_width">4dp</dimen>
-    <dimen name="check_size">28dp</dimen>
+    <dimen name="check_size">48dp</dimen>
     <dimen name="check_margin">10dp</dimen>
     <dimen name="edit_text_margin">6dp</dimen>
     <dimen name="add_view_padding">10dp</dimen>

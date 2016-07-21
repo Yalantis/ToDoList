@@ -9,7 +9,7 @@
     <android.support.v7.widget.AppCompatRadioButton
         android:id="@+id/radio_button"
         android:layout_width="@dimen/check_size"
-        android:layout_height="@dimen/check_size"
+        android:layout_height="match_parent"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/check_margin"
         app:buttonTint="@color/colorBlue" />
@@ -19,7 +19,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/check_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_toRightOf="@+id/radio_button"
         android:ellipsize="end"
