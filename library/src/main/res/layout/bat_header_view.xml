@@ -31,8 +31,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/add_view"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_toRightOf="@+id/add_view" />
 
     <Button
         android:id="@+id/button_add"
@@ -42,9 +42,19 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:text="@string/str_add"
-        android:textStyle="bold"
         android:textAllCaps="false"
         android:textColor="@drawable/selector_button_add"
         android:textSize="@dimen/add_button_text_size"
+        android:textStyle="bold"
         android:visibility="gone" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:background="@color/colorDivider" />
+
 </RelativeLayout>

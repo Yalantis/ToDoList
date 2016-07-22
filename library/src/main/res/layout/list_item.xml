@@ -1,32 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="@dimen/list_item_height"
-    android:id="@+id/root"
-    android:paddingTop="@dimen/list_item_padding"
-    android:paddingBottom="@dimen/list_item_padding"
-    android:background="@android:color/white"
-    android:orientation="horizontal">
+    android:background="@android:color/white">
 
     <android.support.v7.widget.AppCompatRadioButton
         android:id="@+id/radio_button"
         android:layout_width="@dimen/check_size"
-        android:layout_height="@dimen/check_size"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/check_margin"
-        android:layout_gravity="center_vertical"
         app:buttonTint="@color/colorBlue" />
 
     <TextView
-        android:textSize="@dimen/text_size"
         android:id="@+id/text_view"
-        android:textColor="@color/colorTexts"
-        android:layout_marginLeft="@dimen/check_margin"
-        android:lines="1"
-        android:ellipsize="end"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_gravity="center_vertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_toRightOf="@+id/radio_button"
+        android:ellipsize="end"
+        android:lines="1"
+        android:textColor="@color/colorTexts"
+        android:textSize="@dimen/text_size" />
 
-</LinearLayout>
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:background="@color/colorDivider" />
+
+
+</RelativeLayout>
