@@ -13,17 +13,12 @@ public class BatCallback extends ItemTouchHelper.SimpleCallback {
     private RecyclerViewListener mListener;
 
     public BatCallback(RecyclerViewListener listener) {
-        super(-1, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
+        super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
         mListener = listener;
     }
 
     @Override
     public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-  /*      if (mListener != null) {
-            mListener.onMove(viewHolder.getAdapterPosition(), target.getAdapterPosition());
-        }
-
-        return mListener != null;*/
         return false;
     }
 
