@@ -3,11 +3,14 @@ package com.yalantis.beamazingtoday.sample;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
 import com.yalantis.beamazingtoday.listeners.AddItemListener;
+import com.yalantis.beamazingtoday.listeners.RecyclerViewListener;
 import com.yalantis.beamazingtoday.ui.adapter.BatAdapter;
 import com.yalantis.beamazingtoday.ui.animator.BatItemAnimator;
+import com.yalantis.beamazingtoday.ui.callback.BatCallback;
 import com.yalantis.beamazingtoday.ui.widget.BatRecyclerView;
 
 import java.util.ArrayList;
@@ -16,7 +19,7 @@ import java.util.List;
 /**
  * Created by galata on 20.07.16.
  */
-public class ExampleActivity extends Activity implements AddItemListener {
+public class ExampleActivity extends Activity implements AddItemListener, RecyclerViewListener {
 
     private BatRecyclerView mRecyclerView;
     private BatAdapter mAdapter;
@@ -43,6 +46,8 @@ public class ExampleActivity extends Activity implements AddItemListener {
             add("tenth");
         }}));
 
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new BatCallback(this));
+        itemTouchHelper.attachToRecyclerView(mRecyclerView.getView());
         mRecyclerView.getView().setItemAnimator(new BatItemAnimator());
         mRecyclerView.setAddItemListener(this);
 
@@ -58,5 +63,16 @@ public class ExampleActivity extends Activity implements AddItemListener {
     public void add(String string) {
         mGoals.add(0, string);
         mAdapter.notifyItemInserted(0);
+    }
+
+    @Override
+    public void onDismiss(int position) {
+        mGoals.remove(position);
+        mAdapter.notifyItemRemoved(position);
+    }
+
+    @Override
+    public void onMove(int from, int to) {
+
     }
 }
