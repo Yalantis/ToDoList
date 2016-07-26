@@ -3,12 +3,11 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBlue"
-    android:padding="@dimen/activity_horizontal_margin">
+    android:background="@color/colorBlue">
 
     <com.yalantis.beamazingtoday.ui.widget.BatRecyclerView
         android:id="@+id/bat_recycler_view"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal" />
 
