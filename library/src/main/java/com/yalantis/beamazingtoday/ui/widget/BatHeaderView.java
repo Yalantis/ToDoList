@@ -2,7 +2,6 @@ package com.yalantis.beamazingtoday.ui.widget;
 
 import android.content.Context;
 import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.AppCompatRadioButton;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -14,6 +13,7 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.RadioButton;
 
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.yalantis.beamazingtoday.Constant;
@@ -22,6 +22,7 @@ import com.yalantis.beamazingtoday.R2;
 import com.yalantis.beamazingtoday.listeners.AddItemListener;
 import com.yalantis.beamazingtoday.listeners.AnimationListener;
 import com.yalantis.beamazingtoday.util.AnimationUtil;
+import com.yalantis.beamazingtoday.util.TypefaceUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,7 +45,7 @@ public class BatHeaderView extends FrameLayout {
     @BindView(R2.id.root)
     View mRoot;
     @BindView(R2.id.radio_button)
-    AppCompatRadioButton mRadioButton;
+    RadioButton mRadioButton;
     @BindView(R2.id.divider)
     View mDivider;
 
@@ -74,6 +75,7 @@ public class BatHeaderView extends FrameLayout {
                 mButtonAdd.setEnabled(!TextUtils.isEmpty(charSequence));
             }
         });
+        mButtonAdd.setTypeface(TypefaceUtil.getTypeface(getContext()));
     }
 
     @OnClick({R2.id.root, R2.id.add_view, R2.id.clickable_view})

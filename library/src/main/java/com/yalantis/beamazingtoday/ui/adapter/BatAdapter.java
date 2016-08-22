@@ -1,10 +1,10 @@
 package com.yalantis.beamazingtoday.ui.adapter;
 
-import android.support.v7.widget.AppCompatRadioButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.yalantis.beamazingtoday.R;
@@ -45,7 +45,7 @@ public class BatAdapter extends RecyclerView.Adapter<BatAdapter.ViewHolder> {
         @BindView(R2.id.text_view)
         TextView textView;
         @BindView(R2.id.radio_button)
-        AppCompatRadioButton radioButton;
+        RadioButton radioButton;
 
         public ViewHolder(View itemView) {
             super(itemView);
