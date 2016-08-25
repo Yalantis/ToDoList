@@ -10,8 +10,8 @@ import android.widget.FrameLayout;
 import com.yalantis.beamazingtoday.Constant;
 import com.yalantis.beamazingtoday.R;
 import com.yalantis.beamazingtoday.R2;
-import com.yalantis.beamazingtoday.listeners.AddItemListener;
 import com.yalantis.beamazingtoday.listeners.AnimationListener;
+import com.yalantis.beamazingtoday.listeners.BatListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,7 +47,7 @@ public class BatRecyclerView extends FrameLayout {
         mHeaderView.setAnimationListener(new AnimationListenerImpl());
     }
 
-    public void setAddItemListener(AddItemListener listener) {
+    public void setAddItemListener(BatListener listener) {
         mHeaderView.setAddItemListener(listener);
     }
 

@@ -12,6 +12,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 
@@ -19,8 +20,8 @@ import com.jakewharton.rxbinding.widget.RxTextView;
 import com.yalantis.beamazingtoday.Constant;
 import com.yalantis.beamazingtoday.R;
 import com.yalantis.beamazingtoday.R2;
-import com.yalantis.beamazingtoday.listeners.AddItemListener;
 import com.yalantis.beamazingtoday.listeners.AnimationListener;
+import com.yalantis.beamazingtoday.listeners.BatListener;
 import com.yalantis.beamazingtoday.util.AnimationUtil;
 import com.yalantis.beamazingtoday.util.TypefaceUtil;
 
@@ -45,12 +46,12 @@ public class BatHeaderView extends FrameLayout {
     @BindView(R2.id.root)
     View mRoot;
     @BindView(R2.id.radio_button)
-    RadioButton mRadioButton;
+    CheckBox mRadioButton;
     @BindView(R2.id.divider)
     View mDivider;
 
     private AnimationListener mAnimationListener;
-    private AddItemListener mAddItemListener;
+    private BatListener mAddItemListener;
 
     public BatHeaderView(Context context) {
         this(context, null);
@@ -224,7 +225,7 @@ public class BatHeaderView extends FrameLayout {
         mAnimationListener = animationListener;
     }
 
-    void setAddItemListener(AddItemListener addItemListener) {
+    void setAddItemListener(BatListener addItemListener) {
         mAddItemListener = addItemListener;
     }
 }

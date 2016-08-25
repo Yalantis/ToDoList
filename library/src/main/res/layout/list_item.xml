@@ -10,7 +10,12 @@
         android:layout_gravity="center_horizontal"
         android:background="@android:color/white">
 
-        <RadioButton
+        <View
+            android:id="@+id/clickable_view"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"/>
+
+        <CheckBox
             android:id="@+id/radio_button"
             android:layout_width="@dimen/check_size"
             android:layout_height="@dimen/check_size"

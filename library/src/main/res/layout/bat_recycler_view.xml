@@ -9,6 +9,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/background_view_margin_top"
+        android:layout_marginBottom="@dimen/background_view_margin_top"
         android:background="@drawable/recycler_view_background" />
 
     <com.yalantis.beamazingtoday.ui.widget.BatHeaderView
@@ -20,6 +21,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
+        android:overScrollMode="never"
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/recycler_view_margin_top" />

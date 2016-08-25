@@ -3,16 +3,16 @@ package com.yalantis.beamazingtoday.ui.callback;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
-import com.yalantis.beamazingtoday.listeners.RecyclerViewListener;
+import com.yalantis.beamazingtoday.listeners.BatListener;
 
 /**
  * Created by galata on 18.07.16.
  */
 public class BatCallback extends ItemTouchHelper.SimpleCallback {
 
-    private RecyclerViewListener mListener;
+    private BatListener mListener;
 
-    public BatCallback(RecyclerViewListener listener) {
+    public BatCallback(BatListener listener) {
         super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
         mListener = listener;
     }
@@ -25,7 +25,7 @@ public class BatCallback extends ItemTouchHelper.SimpleCallback {
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
         if (mListener != null) {
-            mListener.onDismiss(viewHolder.getAdapterPosition());
+            mListener.delete(viewHolder.getAdapterPosition());
         }
     }
 }

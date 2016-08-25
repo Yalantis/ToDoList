@@ -16,7 +16,7 @@
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/edit_text_margin" />
 
-    <RadioButton
+    <CheckBox
         android:id="@+id/radio_button"
         android:layout_width="@dimen/check_size"
         android:layout_height="@dimen/check_size"
