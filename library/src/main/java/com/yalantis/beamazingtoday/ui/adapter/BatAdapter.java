@@ -14,6 +14,7 @@ import com.yalantis.beamazingtoday.R2;
 import com.yalantis.beamazingtoday.interfaces.AnimationType;
 import com.yalantis.beamazingtoday.interfaces.BatModel;
 import com.yalantis.beamazingtoday.listeners.BatListener;
+import com.yalantis.beamazingtoday.listeners.MoveAnimationListener;
 import com.yalantis.beamazingtoday.ui.animator.BatItemAnimator;
 
 import java.util.List;
@@ -25,16 +26,18 @@ import butterknife.OnClick;
 /**
  * Created by galata on 15.07.16.
  */
-public class BatAdapter extends RecyclerView.Adapter<BatAdapter.ViewHolder> implements CompoundButton.OnCheckedChangeListener {
+public class BatAdapter extends RecyclerView.Adapter<BatAdapter.ViewHolder> implements CompoundButton.OnCheckedChangeListener, MoveAnimationListener {
 
     private List<BatModel> mItems;
     private BatListener mListener;
     private BatItemAnimator mAnimator;
+    private boolean mIsBusy;
 
     public BatAdapter(List<BatModel> goals, BatListener listener, BatItemAnimator animator) {
         mItems = goals;
         mListener = listener;
         mAnimator = animator;
+        mAnimator.setListener(this);
     }
 
     @Override
@@ -45,11 +48,8 @@ public class BatAdapter extends RecyclerView.Adapter<BatAdapter.ViewHolder> impl
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         BatModel model = mItems.get(position);
-
         holder.textView.setText(model.getText());
-        holder.radioButton.setOnCheckedChangeListener(null);
-        holder.radioButton.setChecked(model.isChecked());
-        holder.radioButton.setOnCheckedChangeListener(this);
+        setChecked(holder.radioButton, model.isChecked());
         holder.radioButton.setTag(model);
     }
 
@@ -60,11 +60,19 @@ public class BatAdapter extends RecyclerView.Adapter<BatAdapter.ViewHolder> impl
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (mListener != null) {
+        if (!mIsBusy && mListener != null) {
             BatModel model = (BatModel) buttonView.getTag();
             mListener.move(mItems.indexOf(model), isChecked ? mItems.size() - 1 : 0);
             model.setChecked(isChecked);
+        } else {
+            setChecked(buttonView, !isChecked);
         }
+    }
+
+    private void setChecked(CompoundButton button, boolean checked) {
+        button.setOnCheckedChangeListener(null);
+        button.setChecked(checked);
+        button.setOnCheckedChangeListener(this);
     }
 
     public void notify(@AnimationType int animationType, int position) {
@@ -88,7 +96,18 @@ public class BatAdapter extends RecyclerView.Adapter<BatAdapter.ViewHolder> impl
         mAnimator.setAnimationType(animationType);
     }
 
+    @Override
+    public void onAnimationStarted() {
+        mIsBusy = true;
+    }
+
+    @Override
+    public void onAnimationFinished() {
+        mIsBusy = false;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
+
         @BindView(R2.id.text_view)
         TextView textView;
         @BindView(R2.id.radio_button)
@@ -103,7 +122,9 @@ public class BatAdapter extends RecyclerView.Adapter<BatAdapter.ViewHolder> impl
 
         @OnClick(R2.id.clickable_view)
         void onCheck() {
-            radioButton.toggle();
+            if (!mIsBusy) {
+                radioButton.toggle();
+            }
         }
 
         public int getItemPosition() {

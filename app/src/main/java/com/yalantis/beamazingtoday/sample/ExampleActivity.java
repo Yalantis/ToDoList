@@ -82,8 +82,8 @@ public class ExampleActivity extends Activity implements BatListener {
         mGoals.add(to, model);
         mAdapter.notify(AnimationType.MOVE, from, to);
 
-        if (from == 0) {
-            mRecyclerView.getView().scrollToPosition(from);
+        if (from == 0 || to == 0) {
+            mRecyclerView.getView().scrollToPosition(Math.min(from, to));
         }
     }
 }

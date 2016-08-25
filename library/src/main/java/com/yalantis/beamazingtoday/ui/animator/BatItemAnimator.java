@@ -1,15 +1,20 @@
 package com.yalantis.beamazingtoday.ui.animator;
 
+import android.animation.Animator;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 
 import com.yalantis.beamazingtoday.Constant;
 import com.yalantis.beamazingtoday.R;
 import com.yalantis.beamazingtoday.interfaces.AnimationType;
+import com.yalantis.beamazingtoday.listeners.AnimationListener;
+import com.yalantis.beamazingtoday.listeners.MoveAnimationListener;
 import com.yalantis.beamazingtoday.ui.adapter.BatAdapter;
 
 import java.util.ArrayList;
@@ -35,6 +40,11 @@ public class BatItemAnimator extends SimpleItemAnimator {
     private int mPosition = -1;
     @AnimationType
     private int mAnimationType;
+    private MoveAnimationListener mListener;
+
+    public void setListener(MoveAnimationListener listener) {
+        mListener = listener;
+    }
 
     private void animateAddImpl(final BatAdapter.ViewHolder holder) {
         final View view = holder.itemView;
@@ -65,103 +75,41 @@ public class BatItemAnimator extends SimpleItemAnimator {
                 }).start();
     }
 
-    private void animateRemoveImpl(final BatAdapter.ViewHolder holder) {
+    private void animateMoveImpl(final BatAdapter.ViewHolder holder) {
         final View view = holder.itemView;
-        holder.itemView.bringToFront();
-        final ViewPropertyAnimatorCompat animation = ViewCompat.animate(view);
-        animation.setDuration(Constant.ANIM_DURATION_MILLIS).setListener(new VpaListenerAdapter() {
-            @Override
-            public void onAnimationStart(View view) {
-                dispatchRemoveStarting(holder);
-            }
-
-            @Override
-            public void onAnimationEnd(View view) {
-                animation.setListener(null);
-                dispatchRemoveFinished(holder);
-                mRemoveAnimations.remove(holder);
-                dispatchFinishedWhenDone();
-            }
-        }).start();
-        mRemoveAnimations.add(holder);
-    }
-
-    private void animateMoveImpl(final BatAdapter.ViewHolder holder, int fromX, int toX, int fromY, int toY) {
-        final View view = holder.itemView;
-        final int deltaX = toX - fromX;
-        final int deltaY = toY - fromY;
         final boolean isMainView = isMainListItem(holder.getItemPosition());
+        mListener.onAnimationStarted();
 
         if (isMainView) {
             holder.rootView.setBackgroundResource(R.drawable.header_background_rounded);
-            ViewCompat.animate(holder.rootView).translationZ(10).setDuration(Constant.ANIM_DURATION_MILLIS).start();
         }
-        final ViewPropertyAnimatorCompat animation = ViewCompat.animate(view).scaleX(isMainView ? 1.05f : 1).scaleY(isMainView ? 1.05f : 1)
-                .setDuration(mAnimationType == AnimationType.MOVE ? Constant.ANIM_DURATION_MILLIS : 0);
-        animation.setListener(new ViewPropertyAnimatorListener() {
-            @Override
-            public void onAnimationStart(View view) {
 
-            }
-
-            @Override
-            public void onAnimationEnd(View view) {
-                animation.setListener(null);
-                mMoveAnimations.add(holder);
-                final ViewPropertyAnimatorCompat animation = ViewCompat.animate(view).translationX(0).translationY(0);
-                animation.setDuration(Constant.ANIM_DURATION_MILLIS).setListener(new VpaListenerAdapter() {
+        ViewCompat.animate(view).scaleX(isMainView ? 1.05f : 1).scaleY(isMainView ? 1.05f : 1)
+                .setDuration(mAnimationType == AnimationType.MOVE ? Constant.ANIM_DURATION_MILLIS : 0)
+                .withEndAction(new Runnable() {
                     @Override
-                    public void onAnimationStart(View view) {
-                        dispatchMoveStarting(holder);
-                    }
-
-                    @Override
-                    public void onAnimationCancel(View view) {
-                        if (deltaX != 0) {
-                            ViewCompat.setTranslationX(view, 0);
-                        }
-                        if (deltaY != 0) {
-                            ViewCompat.setTranslationY(view, 0);
-                        }
-
-                        ViewCompat.animate(view).scaleX(1).scaleY(1).translationZ(0).start();
-                        holder.rootView.setBackgroundResource(R.drawable.list_item_background);
-                    }
-
-                    @Override
-                    public void onAnimationEnd(View view) {
-                        animation.setListener(null);
-                        if (isMainListItem(holder.getItemPosition())) {
-                            ViewCompat.animate(view).scaleX(1).scaleY(1).setDuration(Constant.ANIM_DURATION_MILLIS).withEndAction(new Runnable() {
-                                @Override
-                                public void run() {
-                                    holder.rootView.setBackgroundResource(R.drawable.list_item_background);
-                                }
-                            }).start();
-                            ViewCompat.animate(holder.rootView).translationZ(0).setDuration(Constant.ANIM_DURATION_MILLIS).start();
-                            mPosition = -1;
-                        }
-                        dispatchMoveFinished(holder);
-                        mMoveAnimations.remove(holder);
-                        dispatchFinishedWhenDone();
+                    public void run() {
+                        ViewCompat.animate(view).translationX(0).translationY(0).setDuration(Constant.ANIM_DURATION_MILLIS)
+                                .withEndAction(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (isMainListItem(holder.getItemPosition())) {
+                                            ViewCompat.animate(view).scaleX(1).scaleY(1).withEndAction(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    holder.rootView.setBackgroundResource(R.drawable.list_item_background);
+                                                    mListener.onAnimationFinished();
+                                                }
+                                            }).start();
+                                            mPosition = -1;
+                                        }
+                                        dispatchMoveFinished(holder);
+                                        mMoveAnimations.remove(holder);
+                                        dispatchFinishedWhenDone();
+                                    }
+                                });
                     }
                 });
-            }
-
-            @Override
-            public void onAnimationCancel(View view) {
-                if (deltaX != 0) {
-                    ViewCompat.setTranslationX(view, 0);
-                }
-                if (deltaY != 0) {
-                    ViewCompat.setTranslationY(view, 0);
-                }
-
-                ViewCompat.animate(view).scaleX(1).scaleY(1).translationZ(0).start();
-                holder.rootView.setBackgroundResource(R.drawable.list_item_background);
-            }
-        });
-
     }
 
     private boolean isMainListItem(int itemPosition) {
@@ -186,10 +134,6 @@ public class BatItemAnimator extends SimpleItemAnimator {
             // nothing to animate
             return;
         }
-        // First, remove stuff
-        for (RecyclerView.ViewHolder holder : mPendingRemovals) {
-            animateRemoveImpl((BatAdapter.ViewHolder) holder);
-        }
         mPendingRemovals.clear();
         // Next, move stuff
         if (movesPending) {
@@ -201,7 +145,7 @@ public class BatItemAnimator extends SimpleItemAnimator {
                 @Override
                 public void run() {
                     for (MoveInfo moveInfo : moves) {
-                        animateMoveImpl((BatAdapter.ViewHolder) moveInfo.holder, moveInfo.fromX, moveInfo.toX, moveInfo.fromY, moveInfo.toY);
+                        animateMoveImpl((BatAdapter.ViewHolder) moveInfo.holder);
                     }
                     moves.clear();
                     mMovesList.remove(moves);

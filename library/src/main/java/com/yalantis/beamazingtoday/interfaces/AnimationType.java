@@ -9,8 +9,6 @@ import android.support.annotation.IntDef;
 @IntDef({AnimationType.ADD, AnimationType.REMOVE, AnimationType.MOVE})
 public @interface AnimationType {
 
-    int NONE = -1;
-
     int ADD = 0;
 
     int REMOVE = 1;

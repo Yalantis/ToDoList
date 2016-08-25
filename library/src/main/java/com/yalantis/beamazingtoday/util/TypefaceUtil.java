@@ -7,6 +7,7 @@ import android.graphics.Typeface;
  * Created by galata on 26.07.16.
  */
 public class TypefaceUtil {
+
     private static final String FONT_NAME = "font.otf";
 
     private static Typeface sTypeface;
@@ -18,4 +19,5 @@ public class TypefaceUtil {
 
         return sTypeface;
     }
+
 }
