@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BatRecyclerView">
+        <attr name="list_background" format="reference" />
+        <attr name="radio_button_color" format="color" />
+        <attr name="list_item_text_color" format="color" />
+        <attr name="hint_color" format="color" />
+        <attr name="show_divider" format="boolean" />
+        <attr name="anim_duration" format="integer" />
+    </declare-styleable>
+</resources>
