@@ -1,13 +1,11 @@
 package com.yalantis.beamazingtoday.ui.animator;
 
-import android.os.Build;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
 import android.view.View;
-import android.view.animation.Animation;
 
 import com.yalantis.beamazingtoday.Constant;
 import com.yalantis.beamazingtoday.R;
@@ -35,9 +33,8 @@ public class BatItemAnimator extends SimpleItemAnimator {
     private List<RecyclerView.ViewHolder> mChangeAnimations = new ArrayList<>();
 
     private int mPosition = -1;
-    private
     @AnimationType
-    int mAnimationType;
+    private int mAnimationType;
 
     private void animateAddImpl(final BatAdapter.ViewHolder holder) {
         final View view = holder.itemView;
