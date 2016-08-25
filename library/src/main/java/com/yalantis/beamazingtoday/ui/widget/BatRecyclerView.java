@@ -1,10 +1,12 @@
 package com.yalantis.beamazingtoday.ui.widget;
 
 import android.content.Context;
+import android.support.annotation.ColorInt;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import com.yalantis.beamazingtoday.Constant;
@@ -26,6 +28,8 @@ public class BatRecyclerView extends FrameLayout {
     RecyclerView mRecyclerView;
     @BindView(R2.id.header_view)
     BatHeaderView mHeaderView;
+    @BindView(R2.id.view)
+    View mBackground;
 
     public BatRecyclerView(Context context) {
         this(context, null);
@@ -57,6 +61,10 @@ public class BatRecyclerView extends FrameLayout {
 
     public RecyclerView getView() {
         return mRecyclerView;
+    }
+
+    public void setListBackgroundColor(@ColorInt int color) {
+        mBackground.setBackgroundColor(color);
     }
 
     class AnimationListenerImpl implements AnimationListener {

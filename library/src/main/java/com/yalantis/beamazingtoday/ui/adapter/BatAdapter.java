@@ -1,12 +1,12 @@
 package com.yalantis.beamazingtoday.ui.adapter;
 
+import android.support.annotation.ColorRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.yalantis.beamazingtoday.R;
@@ -32,6 +32,11 @@ public class BatAdapter extends RecyclerView.Adapter<BatAdapter.ViewHolder> impl
     private BatListener mListener;
     private BatItemAnimator mAnimator;
     private boolean mIsBusy;
+
+    @ColorRes private int mRadioButtonColor;
+    @ColorRes private int mDividerColor;
+    private boolean mIsDividerVisible;
+
 
     public BatAdapter(List<BatModel> goals, BatListener listener, BatItemAnimator animator) {
         mItems = goals;
@@ -108,12 +113,12 @@ public class BatAdapter extends RecyclerView.Adapter<BatAdapter.ViewHolder> impl
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R2.id.root)
+        public View rootView;
         @BindView(R2.id.text_view)
         TextView textView;
         @BindView(R2.id.radio_button)
         CheckBox radioButton;
-        @BindView(R2.id.root)
-        public View rootView;
 
         public ViewHolder(View itemView) {
             super(itemView);
