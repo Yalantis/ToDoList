@@ -1,19 +1,15 @@
 package com.yalantis.beamazingtoday.ui.animator;
 
-import android.animation.Animator;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
 
 import com.yalantis.beamazingtoday.Constant;
 import com.yalantis.beamazingtoday.R;
 import com.yalantis.beamazingtoday.interfaces.AnimationType;
-import com.yalantis.beamazingtoday.listeners.AnimationListener;
 import com.yalantis.beamazingtoday.listeners.MoveAnimationListener;
 import com.yalantis.beamazingtoday.ui.adapter.BatAdapter;
 
@@ -78,10 +74,10 @@ public class BatItemAnimator extends SimpleItemAnimator {
     private void animateMoveImpl(final BatAdapter.ViewHolder holder) {
         final View view = holder.itemView;
         final boolean isMainView = isMainListItem(holder.getItemPosition());
-        mListener.onAnimationStarted();
 
         if (isMainView) {
             holder.rootView.setBackgroundResource(R.drawable.header_background_rounded);
+            mListener.onAnimationStarted();
         }
 
         ViewCompat.animate(view).scaleX(isMainView ? 1.05f : 1).scaleY(isMainView ? 1.05f : 1)
