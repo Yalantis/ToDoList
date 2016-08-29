@@ -71,6 +71,7 @@ public class BatItemAnimator extends SimpleItemAnimator {
                         dispatchAddFinished(holder);
                         mAddAnimations.remove(holder);
                         dispatchFinishedWhenDone();
+                        mListener.onAnimationFinished();
                     }
                 }).start();
     }
@@ -94,18 +95,14 @@ public class BatItemAnimator extends SimpleItemAnimator {
                                     @Override
                                     public void run() {
                                         if (isMainListItem(holder.getItemPosition())) {
-                                            ViewCompat.animate(view).scaleX(1).scaleY(1).withEndAction(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    holder.rootView.setBackgroundResource(R.drawable.list_item_background);
-                                                    mListener.onAnimationFinished();
-                                                }
-                                            }).start();
+                                            ViewCompat.animate(view).scaleX(1).scaleY(1).start();
+                                            holder.rootView.setBackgroundResource(R.drawable.list_item_background);
                                             mPosition = -1;
                                         }
                                         dispatchMoveFinished(holder);
                                         mMoveAnimations.remove(holder);
                                         dispatchFinishedWhenDone();
+                                        mListener.onAnimationFinished();
                                     }
                                 });
                     }

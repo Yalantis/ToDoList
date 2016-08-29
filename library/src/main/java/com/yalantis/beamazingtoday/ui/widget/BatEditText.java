@@ -1,6 +1,10 @@
 package com.yalantis.beamazingtoday.ui.widget;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.support.annotation.ColorInt;
+import android.support.annotation.StringRes;
+import android.support.v7.widget.AppCompatImageView;
 import android.text.Layout;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -10,6 +14,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.yalantis.beamazingtoday.R;
@@ -26,7 +31,7 @@ import rx.functions.Action1;
 public class BatEditText extends FrameLayout {
 
     @BindView(R2.id.cursor)
-    View mCursor;
+    AppCompatImageView mCursor;
     @BindView(R2.id.edit_text)
     EditText mEditText;
 
@@ -125,5 +130,25 @@ public class BatEditText extends FrameLayout {
 
         int position = mEditText.getSelectionStart();
         return layout.getPrimaryHorizontal(position);
+    }
+
+    void setHintColor(@ColorInt int color) {
+        mEditText.setHintTextColor(color);
+    }
+
+    void setTextColor(@ColorInt int color) {
+        mEditText.setTextColor(color);
+    }
+
+    void setCursorColor(@ColorInt int color) {
+        mCursor.setSupportBackgroundTintList(ColorStateList.valueOf(color));
+    }
+
+    void setHint(@StringRes int hint) {
+        mEditText.setHint(hint);
+    }
+
+    void setHint(String hint) {
+        mEditText.setHint(hint);
     }
 }

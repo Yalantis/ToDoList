@@ -1,7 +1,13 @@
 package com.yalantis.beamazingtoday.ui.widget;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.support.annotation.ColorInt;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.StringRes;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.widget.AppCompatCheckBox;
+import android.support.v7.widget.AppCompatRadioButton;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -46,7 +52,7 @@ public class BatHeaderView extends FrameLayout {
     @BindView(R2.id.root)
     View mRoot;
     @BindView(R2.id.radio_button)
-    CheckBox mRadioButton;
+    AppCompatCheckBox mRadioButton;
     @BindView(R2.id.divider)
     View mDivider;
 
@@ -227,5 +233,29 @@ public class BatHeaderView extends FrameLayout {
 
     void setAddItemListener(BatListener addItemListener) {
         mAddItemListener = addItemListener;
+    }
+
+    void setDividerVisibility(boolean visible) {
+        mDivider.setVisibility(visible ? VISIBLE : GONE);
+    }
+
+    void setDividerColor(@ColorInt int color) {
+        mDivider.setBackgroundColor(color);
+    }
+
+    void setPlusColor(@ColorInt int color) {
+        mAddView.setColor(color);
+    }
+
+    void setRadioButtonColor(@ColorInt int color) {
+        mRadioButton.setSupportButtonTintList(ColorStateList.valueOf(color));
+    }
+
+    void setRadioButtonSelector(@DrawableRes int drawable) {
+        mRadioButton.setBackgroundResource(drawable);
+    }
+
+    void setAddButtonColor(ColorStateList list) {
+        mButtonAdd.setTextColor(list);
     }
 }

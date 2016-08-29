@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
+import android.widget.Toast;
 
 import com.yalantis.beamazingtoday.interfaces.AnimationType;
 import com.yalantis.beamazingtoday.interfaces.BatModel;
 import com.yalantis.beamazingtoday.listeners.BatListener;
+import com.yalantis.beamazingtoday.listeners.OnItemClickListener;
 import com.yalantis.beamazingtoday.ui.adapter.BatAdapter;
 import com.yalantis.beamazingtoday.ui.animator.BatItemAnimator;
 import com.yalantis.beamazingtoday.ui.callback.BatCallback;
@@ -20,7 +22,7 @@ import java.util.List;
 /**
  * Created by galata on 20.07.16.
  */
-public class ExampleActivity extends Activity implements BatListener {
+public class ExampleActivity extends Activity implements BatListener, OnItemClickListener {
 
     private BatRecyclerView mRecyclerView;
     private BatAdapter mAdapter;
@@ -47,7 +49,7 @@ public class ExampleActivity extends Activity implements BatListener {
             add(new Goal("eighth"));
             add(new Goal("ninth"));
             add(new Goal("tenth"));
-        }}, this, mAnimator));
+        }}, this, mAnimator).setOnItemClickListener(this));
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new BatCallback(this));
         itemTouchHelper.attachToRecyclerView(mRecyclerView.getView());
@@ -85,5 +87,10 @@ public class ExampleActivity extends Activity implements BatListener {
         if (from == 0 || to == 0) {
             mRecyclerView.getView().scrollToPosition(Math.min(from, to));
         }
+    }
+
+    @Override
+    public void onClick(BatModel item, int position) {
+        Toast.makeText(this, item.getText(), Toast.LENGTH_SHORT).show();
     }
 }
