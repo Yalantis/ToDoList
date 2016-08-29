@@ -1,18 +1,14 @@
 package com.yalantis.beamazingtoday.ui.adapter;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.v7.widget.AppCompatCheckBox;
-import android.support.v7.widget.AppCompatRadioButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
@@ -42,9 +38,12 @@ public class BatAdapter extends RecyclerView.Adapter<BatAdapter.ViewHolder> impl
     private BatItemAnimator mAnimator;
     private boolean mIsBusy;
 
-    @DrawableRes private int mRadioButtonRes = R.drawable.selector_radio_button;
-    @ColorRes private int mDividerColor = R.color.colorDivider;
-    @ColorRes private int mTextColor = R.color.colorTexts;
+    @DrawableRes
+    private int mRadioButtonRes = R.drawable.selector_radio_button;
+    @ColorRes
+    private int mDividerColor = R.color.colorDivider;
+    @ColorRes
+    private int mTextColor = R.color.colorTexts;
     private boolean mIsDividerVisible = true;
     private Typeface mTypeface;
     private OnItemClickListener mItemClickListener;
@@ -93,13 +92,10 @@ public class BatAdapter extends RecyclerView.Adapter<BatAdapter.ViewHolder> impl
         holder.textView.setText(model.getText());
         setChecked(holder.radioButton, model.isChecked());
         holder.radioButton.setTag(model);
-
         holder.radioButton.setBackgroundResource(mRadioButtonRes);
         holder.divider.setBackgroundResource(mDividerColor);
         holder.textView.setTextColor(getColor(holder.rootView.getContext(), mTextColor));
-        if (mTypeface != null) {
-            holder.textView.setTypeface(mTypeface);
-        }
+        holder.textView.setTypeface(mTypeface != null ? mTypeface : TypefaceUtil.getTypeface(holder.rootView.getContext()));
         holder.divider.setVisibility(mIsDividerVisible ? View.VISIBLE : View.GONE);
     }
 

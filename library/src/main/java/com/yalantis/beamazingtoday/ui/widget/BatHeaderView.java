@@ -4,10 +4,8 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.StringRes;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.AppCompatCheckBox;
-import android.support.v7.widget.AppCompatRadioButton;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -18,9 +16,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.FrameLayout;
-import android.widget.RadioButton;
 
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.yalantis.beamazingtoday.Constant;
@@ -222,7 +218,7 @@ public class BatHeaderView extends FrameLayout {
         }).start();
     }
 
-    public int dpToPx(int dp) {
+    private int dpToPx(int dp) {
         DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
         return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }

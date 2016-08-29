@@ -24,9 +24,6 @@ public class AnimationUtil {
     public static void hide(View view) {
         animateAlpha(view, 0, null);
     }
-    public static void hide(View view, Runnable endAction) {
-        animateAlpha(view, 0, endAction);
-    }
 
     public static void rotate(View view, int value, @Nullable Runnable endAction) {
         ViewPropertyAnimatorCompat animator = ViewCompat.animate(view).rotation(value);
@@ -56,18 +53,8 @@ public class AnimationUtil {
         }
     }
 
-    public static void scaleYViews(float value, View ... views) {
-        for (View view : views) {
-            scaleY(value, view);
-        }
-    }
-
     public static void scaleX(float value, View view) {
         ViewCompat.animate(view).scaleX(value).setDuration(Constant.ANIM_DURATION_MILLIS).start();
-    }
-
-    public static void scaleY(float value, View view) {
-        ViewCompat.animate(view).scaleY(value).setDuration(Constant.ANIM_DURATION_MILLIS).start();
     }
 
     public static void moveX(View view, float value) {
@@ -76,10 +63,6 @@ public class AnimationUtil {
 
     public static void moveX(View view, float value, Runnable endAction) {
         ViewCompat.animate(view).translationX(value).withEndAction(endAction).setDuration(Constant.ANIM_DURATION_MILLIS).start();
-    }
-
-    public static void moveY(View view, float value) {
-        ViewCompat.animate(view).translationY(value).setDuration(Constant.ANIM_DURATION_MILLIS).start();
     }
 
     private static void animateAlpha(final View view, final float alpha, @Nullable final Runnable endAction) {
