@@ -94,8 +94,8 @@ public class BatItemAnimator extends SimpleItemAnimator {
                                 .withEndAction(new Runnable() {
                                     @Override
                                     public void run() {
+                                        ViewCompat.animate(view).scaleX(1).scaleY(1).start();
                                         if (isMainListItem(holder.getItemPosition())) {
-                                            ViewCompat.animate(view).scaleX(1).scaleY(1).start();
                                             holder.rootView.setBackgroundResource(R.drawable.list_item_background);
                                             mPosition = -1;
                                         }
