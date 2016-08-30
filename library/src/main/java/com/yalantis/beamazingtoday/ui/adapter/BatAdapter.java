@@ -19,6 +19,7 @@ import com.yalantis.beamazingtoday.interfaces.BatModel;
 import com.yalantis.beamazingtoday.listeners.BatListener;
 import com.yalantis.beamazingtoday.listeners.MoveAnimationListener;
 import com.yalantis.beamazingtoday.listeners.OnItemClickListener;
+import com.yalantis.beamazingtoday.listeners.OnOutsideClickedListener;
 import com.yalantis.beamazingtoday.ui.animator.BatItemAnimator;
 import com.yalantis.beamazingtoday.util.TypefaceUtil;
 
@@ -47,6 +48,7 @@ public class BatAdapter extends RecyclerView.Adapter<BatAdapter.ViewHolder> impl
     private boolean mIsDividerVisible = true;
     private Typeface mTypeface;
     private OnItemClickListener mItemClickListener;
+    private OnOutsideClickedListener mOnOutsideClickedListener;
 
     public BatAdapter(List<BatModel> goals, BatListener listener, BatItemAnimator animator) {
         mItems = goals;
@@ -63,6 +65,11 @@ public class BatAdapter extends RecyclerView.Adapter<BatAdapter.ViewHolder> impl
     public BatAdapter setDividerColor(@ColorRes int color) {
         mDividerColor = color;
         mIsDividerVisible = true;
+        return this;
+    }
+
+    public BatAdapter setOnOutsideClickListener(OnOutsideClickedListener listener) {
+        mOnOutsideClickedListener = listener;
         return this;
     }
 
@@ -184,6 +191,13 @@ public class BatAdapter extends RecyclerView.Adapter<BatAdapter.ViewHolder> impl
             if (mItemClickListener != null) {
                 BatModel item = (BatModel) radioButton.getTag();
                 mItemClickListener.onClick(item, mItems.indexOf(item));
+            }
+        }
+
+        @OnClick(R2.id.full_list_item)
+        void onOutsideClicked() {
+            if (mOnOutsideClickedListener != null) {
+                mOnOutsideClickedListener.onOutsideClicked();
             }
         }
 

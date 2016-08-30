@@ -11,6 +11,7 @@ import com.yalantis.beamazingtoday.interfaces.AnimationType;
 import com.yalantis.beamazingtoday.interfaces.BatModel;
 import com.yalantis.beamazingtoday.listeners.BatListener;
 import com.yalantis.beamazingtoday.listeners.OnItemClickListener;
+import com.yalantis.beamazingtoday.listeners.OnOutsideClickedListener;
 import com.yalantis.beamazingtoday.ui.adapter.BatAdapter;
 import com.yalantis.beamazingtoday.ui.animator.BatItemAnimator;
 import com.yalantis.beamazingtoday.ui.callback.BatCallback;
@@ -22,7 +23,7 @@ import java.util.List;
 /**
  * Created by galata on 20.07.16.
  */
-public class ExampleActivity extends Activity implements BatListener, OnItemClickListener {
+public class ExampleActivity extends Activity implements BatListener, OnItemClickListener, OnOutsideClickedListener {
 
     private BatRecyclerView mRecyclerView;
     private BatAdapter mAdapter;
@@ -49,7 +50,7 @@ public class ExampleActivity extends Activity implements BatListener, OnItemClic
             add(new Goal("eighth"));
             add(new Goal("ninth"));
             add(new Goal("tenth"));
-        }}, this, mAnimator).setOnItemClickListener(this));
+        }}, this, mAnimator).setOnItemClickListener(this).setOnOutsideClickListener(this));
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new BatCallback(this));
         itemTouchHelper.attachToRecyclerView(mRecyclerView.getView());
@@ -92,5 +93,10 @@ public class ExampleActivity extends Activity implements BatListener, OnItemClic
     @Override
     public void onClick(BatModel item, int position) {
         Toast.makeText(this, item.getText(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onOutsideClicked() {
+        mRecyclerView.revertAnimation();
     }
 }
