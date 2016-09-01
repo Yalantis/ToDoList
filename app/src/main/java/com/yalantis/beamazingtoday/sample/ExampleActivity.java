@@ -5,9 +5,13 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
+import android.widget.Toast;
 
-import com.yalantis.beamazingtoday.listeners.AddItemListener;
-import com.yalantis.beamazingtoday.listeners.RecyclerViewListener;
+import com.yalantis.beamazingtoday.interfaces.AnimationType;
+import com.yalantis.beamazingtoday.interfaces.BatModel;
+import com.yalantis.beamazingtoday.listeners.BatListener;
+import com.yalantis.beamazingtoday.listeners.OnItemClickListener;
+import com.yalantis.beamazingtoday.listeners.OnOutsideClickedListener;
 import com.yalantis.beamazingtoday.ui.adapter.BatAdapter;
 import com.yalantis.beamazingtoday.ui.animator.BatItemAnimator;
 import com.yalantis.beamazingtoday.ui.callback.BatCallback;
@@ -19,11 +23,12 @@ import java.util.List;
 /**
  * Created by galata on 20.07.16.
  */
-public class ExampleActivity extends Activity implements AddItemListener, RecyclerViewListener {
+public class ExampleActivity extends Activity implements BatListener, OnItemClickListener, OnOutsideClickedListener {
 
     private BatRecyclerView mRecyclerView;
     private BatAdapter mAdapter;
-    private List<String> mGoals;
+    private List<BatModel> mGoals;
+    private BatItemAnimator mAnimator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,24 +36,25 @@ public class ExampleActivity extends Activity implements AddItemListener, Recycl
         setContentView(R.layout.activity_example);
 
         mRecyclerView = (BatRecyclerView) findViewById(R.id.bat_recycler_view);
+        mAnimator = new BatItemAnimator();
 
         mRecyclerView.getView().setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.getView().setAdapter(mAdapter = new BatAdapter(mGoals = new ArrayList<String>() {{
-            add("first");
-            add("second");
-            add("third");
-            add("fourth");
-            add("fifth");
-            add("sixth");
-            add("seventh");
-            add("eighth");
-            add("ninth");
-            add("tenth");
-        }}));
+        mRecyclerView.getView().setAdapter(mAdapter = new BatAdapter(mGoals = new ArrayList<BatModel>() {{
+            add(new Goal("first"));
+            add(new Goal("second"));
+            add(new Goal("third"));
+            add(new Goal("fourth"));
+            add(new Goal("fifth"));
+            add(new Goal("sixth"));
+            add(new Goal("seventh"));
+            add(new Goal("eighth"));
+            add(new Goal("ninth"));
+            add(new Goal("tenth"));
+        }}, this, mAnimator).setOnItemClickListener(this).setOnOutsideClickListener(this));
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new BatCallback(this));
         itemTouchHelper.attachToRecyclerView(mRecyclerView.getView());
-        mRecyclerView.getView().setItemAnimator(new BatItemAnimator());
+        mRecyclerView.getView().setItemAnimator(mAnimator);
         mRecyclerView.setAddItemListener(this);
 
         findViewById(R.id.root).setOnClickListener(new View.OnClickListener() {
@@ -61,18 +67,36 @@ public class ExampleActivity extends Activity implements AddItemListener, Recycl
 
     @Override
     public void add(String string) {
-        mGoals.add(0, string);
-        mAdapter.notifyItemInserted(0);
+        mGoals.add(0, new Goal(string));
+        mAdapter.notify(AnimationType.ADD, 0);
     }
 
     @Override
-    public void onDismiss(int position) {
+    public void delete(int position) {
         mGoals.remove(position);
-        mAdapter.notifyItemRemoved(position);
+        mAdapter.notify(AnimationType.REMOVE, position);
     }
 
     @Override
-    public void onMove(int from, int to) {
+    public void move(int from, int to) {
+        mAnimator.setPosition(to);
+        BatModel model = mGoals.get(from);
+        mGoals.remove(model);
+        mGoals.add(to, model);
+        mAdapter.notify(AnimationType.MOVE, from, to);
 
+        if (from == 0 || to == 0) {
+            mRecyclerView.getView().scrollToPosition(Math.min(from, to));
+        }
+    }
+
+    @Override
+    public void onClick(BatModel item, int position) {
+        Toast.makeText(this, item.getText(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onOutsideClicked() {
+        mRecyclerView.revertAnimation();
     }
 }

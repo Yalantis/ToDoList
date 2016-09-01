@@ -1,8 +1,11 @@
 package com.yalantis.beamazingtoday.ui.widget;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.support.annotation.ColorInt;
+import android.support.annotation.DrawableRes;
 import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.AppCompatRadioButton;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -19,9 +22,10 @@ import com.jakewharton.rxbinding.widget.RxTextView;
 import com.yalantis.beamazingtoday.Constant;
 import com.yalantis.beamazingtoday.R;
 import com.yalantis.beamazingtoday.R2;
-import com.yalantis.beamazingtoday.listeners.AddItemListener;
 import com.yalantis.beamazingtoday.listeners.AnimationListener;
+import com.yalantis.beamazingtoday.listeners.BatListener;
 import com.yalantis.beamazingtoday.util.AnimationUtil;
+import com.yalantis.beamazingtoday.util.TypefaceUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,12 +48,12 @@ public class BatHeaderView extends FrameLayout {
     @BindView(R2.id.root)
     View mRoot;
     @BindView(R2.id.radio_button)
-    AppCompatRadioButton mRadioButton;
+    AppCompatCheckBox mRadioButton;
     @BindView(R2.id.divider)
     View mDivider;
 
     private AnimationListener mAnimationListener;
-    private AddItemListener mAddItemListener;
+    private BatListener mAddItemListener;
 
     public BatHeaderView(Context context) {
         this(context, null);
@@ -74,6 +78,7 @@ public class BatHeaderView extends FrameLayout {
                 mButtonAdd.setEnabled(!TextUtils.isEmpty(charSequence));
             }
         });
+        mButtonAdd.setTypeface(TypefaceUtil.getTypeface(getContext()));
     }
 
     @OnClick({R2.id.root, R2.id.add_view, R2.id.clickable_view})
@@ -213,7 +218,7 @@ public class BatHeaderView extends FrameLayout {
         }).start();
     }
 
-    public int dpToPx(int dp) {
+    private int dpToPx(int dp) {
         DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
         return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
@@ -222,7 +227,31 @@ public class BatHeaderView extends FrameLayout {
         mAnimationListener = animationListener;
     }
 
-    void setAddItemListener(AddItemListener addItemListener) {
+    void setAddItemListener(BatListener addItemListener) {
         mAddItemListener = addItemListener;
+    }
+
+    void setDividerVisibility(boolean visible) {
+        mDivider.setVisibility(visible ? VISIBLE : GONE);
+    }
+
+    void setDividerColor(@ColorInt int color) {
+        mDivider.setBackgroundColor(color);
+    }
+
+    void setPlusColor(@ColorInt int color) {
+        mAddView.setColor(color);
+    }
+
+    void setRadioButtonColor(@ColorInt int color) {
+        mRadioButton.setSupportButtonTintList(ColorStateList.valueOf(color));
+    }
+
+    void setRadioButtonSelector(@DrawableRes int drawable) {
+        mRadioButton.setBackgroundResource(drawable);
+    }
+
+    void setAddButtonColor(ColorStateList list) {
+        mButtonAdd.setTextColor(list);
     }
 }

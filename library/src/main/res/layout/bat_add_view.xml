@@ -3,12 +3,12 @@
     android:layout_width="@dimen/add_view_size"
     android:layout_height="@dimen/add_view_size">
 
-    <View
+    <android.support.v7.widget.AppCompatImageView
         android:id="@+id/view_vertical"
         style="@style/Cursor"
         android:layout_gravity="center" />
 
-    <View
+    <android.support.v7.widget.AppCompatImageView
         android:id="@+id/view_horizontal"
         style="@style/Cursor"
         android:layout_gravity="center"

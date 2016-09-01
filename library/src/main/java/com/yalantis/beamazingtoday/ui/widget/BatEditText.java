@@ -1,6 +1,10 @@
 package com.yalantis.beamazingtoday.ui.widget;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.support.annotation.ColorInt;
+import android.support.annotation.StringRes;
+import android.support.v7.widget.AppCompatImageView;
 import android.text.Layout;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -8,15 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
-import com.jakewharton.rxbinding.view.RxView;
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.yalantis.beamazingtoday.R;
 import com.yalantis.beamazingtoday.R2;
-import com.yalantis.beamazingtoday.util.AnimationUtil;
+import com.yalantis.beamazingtoday.util.TypefaceUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,7 +31,7 @@ import rx.functions.Action1;
 public class BatEditText extends FrameLayout {
 
     @BindView(R2.id.cursor)
-    View mCursor;
+    AppCompatImageView mCursor;
     @BindView(R2.id.edit_text)
     EditText mEditText;
 
@@ -59,6 +62,7 @@ public class BatEditText extends FrameLayout {
                 }
             }
         });
+        mEditText.setTypeface(TypefaceUtil.getTypeface(getContext()));
     }
 
     public EditText getView() {
@@ -80,6 +84,11 @@ public class BatEditText extends FrameLayout {
         return mEditText.isEnabled();
     }
 
+    @Override
+    public void setEnabled(boolean enabled) {
+        mEditText.setEnabled(enabled);
+    }
+
     public void showCursor() {
         mCursor.setVisibility(VISIBLE);
         startBlinking();
@@ -97,11 +106,6 @@ public class BatEditText extends FrameLayout {
 
     public String getText() {
         return mEditText.getText().toString();
-    }
-
-    @Override
-    public void setEnabled(boolean enabled) {
-        mEditText.setEnabled(enabled);
     }
 
     public void focus() {
@@ -126,5 +130,25 @@ public class BatEditText extends FrameLayout {
 
         int position = mEditText.getSelectionStart();
         return layout.getPrimaryHorizontal(position);
+    }
+
+    void setHintColor(@ColorInt int color) {
+        mEditText.setHintTextColor(color);
+    }
+
+    void setTextColor(@ColorInt int color) {
+        mEditText.setTextColor(color);
+    }
+
+    void setCursorColor(@ColorInt int color) {
+        mCursor.setSupportBackgroundTintList(ColorStateList.valueOf(color));
+    }
+
+    void setHint(@StringRes int hint) {
+        mEditText.setHint(hint);
+    }
+
+    void setHint(String hint) {
+        mEditText.setHint(hint);
     }
 }

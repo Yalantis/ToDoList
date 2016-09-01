@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:id="@+id/full_list_item"
     android:layout_height="@dimen/list_item_height">
 
     <RelativeLayout
@@ -11,20 +11,26 @@
         android:layout_gravity="center_horizontal"
         android:background="@android:color/white">
 
-        <android.support.v7.widget.AppCompatRadioButton
+        <View
+            android:id="@+id/clickable_view"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"/>
+
+        <android.support.v7.widget.AppCompatCheckBox
             android:id="@+id/radio_button"
-            android:layout_width="@dimen/check_size"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/check_margin"
-            app:buttonTint="@color/colorBlue" />
+            android:button="@drawable/selector_radio_button"
+            android:checked="true" />
 
         <TextView
             android:id="@+id/text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/check_margin"
+            android:layout_marginLeft="@dimen/add_view_padding"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_toRightOf="@+id/radio_button"
             android:ellipsize="end"

@@ -1,12 +1,16 @@
 package com.yalantis.beamazingtoday.ui.widget;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.yalantis.beamazingtoday.R2;
 import com.yalantis.beamazingtoday.util.AnimationUtil;
@@ -24,7 +28,9 @@ public class AddView extends FrameLayout {
     private static final int END_POSITION = 180;
 
     @BindView(R2.id.view_horizontal)
-    View mHorizontalView;
+    AppCompatImageView mHorizontalView;
+    @BindView(R2.id.view_vertical)
+    AppCompatImageView mVerticalView;
 
     public AddView(Context context) {
         this(context, null);
@@ -61,5 +67,11 @@ public class AddView extends FrameLayout {
 
     public void hide() {
         AnimationUtil.hide(this);
+    }
+
+    void setColor(@ColorInt int color) {
+        ColorStateList list = ColorStateList.valueOf(color);
+        mHorizontalView.setSupportBackgroundTintList(list);
+        mVerticalView.setSupportBackgroundTintList(list);
     }
 }

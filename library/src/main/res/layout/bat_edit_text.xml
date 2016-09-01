@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <View
+    <android.support.v7.widget.AppCompatImageView
         android:id="@+id/cursor"
         style="@style/Cursor"
         android:visibility="invisible"
