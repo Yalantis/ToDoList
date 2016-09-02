@@ -7,12 +7,12 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.FrameLayout;
 
 import com.yalantis.beamazingtoday.Constant;
@@ -78,7 +78,7 @@ public class BatRecyclerView extends FrameLayout {
     }
 
     @ColorInt int getColor(@ColorRes int color) {
-        return getResources().getColor(color);
+        return ContextCompat.getColor(getContext(), color);
     }
 
     @Override

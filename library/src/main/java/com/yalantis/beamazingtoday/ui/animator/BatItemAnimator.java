@@ -53,7 +53,7 @@ public class BatItemAnimator extends SimpleItemAnimator {
 
         final ViewPropertyAnimatorCompat animation = ViewCompat.animate(view);
         animation.setDuration(ANIM_DURATION).
-                setListener(new VpaListenerAdapter() {
+                setListener(new ViewPropertyAnimatorListener() {
                     @Override
                     public void onAnimationStart(View view) {
                         dispatchAddStarting(holder);
@@ -532,17 +532,4 @@ public class BatItemAnimator extends SimpleItemAnimator {
         }
     }
 
-    private static class VpaListenerAdapter implements ViewPropertyAnimatorListener {
-        @Override
-        public void onAnimationStart(View view) {
-        }
-
-        @Override
-        public void onAnimationEnd(View view) {
-        }
-
-        @Override
-        public void onAnimationCancel(View view) {
-        }
-    }
 }

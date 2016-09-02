@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -107,7 +108,7 @@ public class BatAdapter extends RecyclerView.Adapter<BatAdapter.ViewHolder> impl
     }
 
     private int getColor(Context context, @ColorRes int color) {
-        return context.getResources().getColor(color);
+        return ContextCompat.getColor(context, color);
     }
 
     @Override
@@ -202,7 +203,7 @@ public class BatAdapter extends RecyclerView.Adapter<BatAdapter.ViewHolder> impl
         }
 
         public int getItemPosition() {
-            return mItems.indexOf((BatModel) radioButton.getTag());
+            return mItems.indexOf(radioButton.getTag());
         }
     }
 }

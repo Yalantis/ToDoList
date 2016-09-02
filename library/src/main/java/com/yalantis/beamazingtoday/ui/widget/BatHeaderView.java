@@ -9,6 +9,7 @@ import android.support.v7.widget.AppCompatCheckBox;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
@@ -218,9 +219,9 @@ public class BatHeaderView extends FrameLayout {
         }).start();
     }
 
-    private int dpToPx(int dp) {
+    private float dpToPx(int dp) {
         DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
-        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, displayMetrics);
     }
 
     void setAnimationListener(AnimationListener animationListener) {
