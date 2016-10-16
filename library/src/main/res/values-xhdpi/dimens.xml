@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="recycler_view_width">280dp</dimen>
+    <dimen name="card_width">260dp</dimen>
+    <dimen name="small_card_width">240dp</dimen>
+</resources>

@@ -1,10 +1,12 @@
 package com.yalantis.beamazingtoday.sample;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yalantis.beamazingtoday.interfaces.AnimationType;
@@ -16,6 +18,7 @@ import com.yalantis.beamazingtoday.ui.adapter.BatAdapter;
 import com.yalantis.beamazingtoday.ui.animator.BatItemAnimator;
 import com.yalantis.beamazingtoday.ui.callback.BatCallback;
 import com.yalantis.beamazingtoday.ui.widget.BatRecyclerView;
+import com.yalantis.beamazingtoday.util.TypefaceUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +26,7 @@ import java.util.List;
 /**
  * Created by galata on 20.07.16.
  */
-public class ExampleActivity extends Activity implements BatListener, OnItemClickListener, OnOutsideClickedListener {
+public class ExampleActivity extends AppCompatActivity implements BatListener, OnItemClickListener, OnOutsideClickedListener {
 
     private BatRecyclerView mRecyclerView;
     private BatAdapter mAdapter;
@@ -34,6 +37,12 @@ public class ExampleActivity extends Activity implements BatListener, OnItemClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_example);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+
+        ((TextView) findViewById(R.id.text_title)).setTypeface(TypefaceUtil.getAvenirTypeface(this));
 
         mRecyclerView = (BatRecyclerView) findViewById(R.id.bat_recycler_view);
         mAnimator = new BatItemAnimator();
@@ -79,14 +88,16 @@ public class ExampleActivity extends Activity implements BatListener, OnItemClic
 
     @Override
     public void move(int from, int to) {
-        mAnimator.setPosition(to);
-        BatModel model = mGoals.get(from);
-        mGoals.remove(model);
-        mGoals.add(to, model);
-        mAdapter.notify(AnimationType.MOVE, from, to);
+        if (from >= 0 && to >= 0) {
+            mAnimator.setPosition(to);
+            BatModel model = mGoals.get(from);
+            mGoals.remove(model);
+            mGoals.add(to, model);
+            mAdapter.notify(AnimationType.MOVE, from, to);
 
-        if (from == 0 || to == 0) {
-            mRecyclerView.getView().scrollToPosition(Math.min(from, to));
+            if (from == 0 || to == 0) {
+                mRecyclerView.getView().scrollToPosition(Math.min(from, to));
+            }
         }
     }
 
