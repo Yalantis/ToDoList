@@ -62,6 +62,11 @@ public class BatAdapter extends RecyclerView.Adapter<BatAdapter.ViewHolder> impl
         }
     }
 
+    public BatAdapter(List<BatModel> goals, @Nullable BatListener listener) {
+        mItems = goals;
+        mListener = listener;
+    }
+
     public BatAdapter setRadioButtonColor(@DrawableRes int drawable) {
         mRadioButtonRes = drawable;
         return this;
