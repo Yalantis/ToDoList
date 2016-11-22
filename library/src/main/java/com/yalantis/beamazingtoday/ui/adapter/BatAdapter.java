@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.RecyclerView;
@@ -51,11 +52,14 @@ public class BatAdapter extends RecyclerView.Adapter<BatAdapter.ViewHolder> impl
     private OnItemClickListener mItemClickListener;
     private OnOutsideClickedListener mOnOutsideClickedListener;
 
-    public BatAdapter(List<BatModel> goals, BatListener listener, BatItemAnimator animator) {
+    public BatAdapter(List<BatModel> goals, @Nullable BatListener listener, @Nullable BatItemAnimator animator) {
         mItems = goals;
         mListener = listener;
         mAnimator = animator;
-        mAnimator.setListener(this);
+
+        if (mAnimator != null) {
+            mAnimator.setListener(this);
+        }
     }
 
     public BatAdapter setRadioButtonColor(@DrawableRes int drawable) {
@@ -151,7 +155,9 @@ public class BatAdapter extends RecyclerView.Adapter<BatAdapter.ViewHolder> impl
                 break;
         }
 
-        mAnimator.setAnimationType(animationType);
+        if (mAnimator != null) {
+            mAnimator.setAnimationType(animationType);
+        }
     }
 
     @Override
