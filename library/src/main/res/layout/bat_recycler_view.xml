@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:layout_width="@dimen/small_card_width"
+        android:layout_height="30dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/background_view_margin_top"
+        android:alpha="0.1"
+        android:background="@drawable/background_card" />
+
+    <View
+        android:layout_width="@dimen/card_width"
+        android:layout_height="30dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/background_view_margin_top"
+        android:layout_marginTop="10dp"
+        android:alpha="0.2"
+        android:background="@drawable/background_card" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/view"
+        android:layout_width="@dimen/recycler_view_width"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/background_view_margin_top"
+        android:layout_marginTop="@dimen/background_view_margin_top"
+        android:background="@drawable/recycler_view_background" />
+
+    <com.yalantis.beamazingtoday.ui.widget.BatHeaderView
+        android:id="@+id/header_view"
+        android:layout_width="@dimen/recycler_view_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/recycler_view_margin_top"
+        android:overScrollMode="never" />
+</FrameLayout>

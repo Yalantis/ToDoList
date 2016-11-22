@@ -6,7 +6,12 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:statusBarColor">#0094DE</item>
+    </style>
+
+    <style name="Cursor">
+        <item name="android:layout_width">@dimen/cursor_width</item>
+        <item name="android:layout_height">@dimen/add_view_size</item>
+        <item name="android:background">@drawable/ic_cursor_drawable</item>
     </style>
 
 </resources>
