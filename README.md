@@ -10,6 +10,8 @@ Check this [project on dribbble](https://dribbble.com/shots/2589690-Be-amazing-t
 
 Read how we did it [on our blog](https://yalantis.com/blog/how-we-used-micro-transitions-for-smooth-android-to-do-list-animations/)
 
+<img src="content_shot_to-do_dribbble.gif"/>
+
 ##Requirements
 - Android SDK 16+
 
