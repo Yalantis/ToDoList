@@ -3,13 +3,12 @@ package com.yalantis.beamazingtoday.ui.widget;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.support.annotation.ColorInt;
+import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
@@ -98,7 +97,7 @@ public class BatHeaderView extends FrameLayout {
                 .setDuration(Constant.ANIM_DURATION_MILLIS).start();
         AnimationUtil.hide(mDivider);
         AnimationUtil.scaleXViews(0.9f, mButtonAdd, mEditText);
-        AnimationUtil.moveX(mEditText, -mAddView.getWidth(), new Runnable() {
+        AnimationUtil.moveX(mEditText, -mAddView.getWidth() - getDimen(R.dimen.cursor_offset), new Runnable() {
             @Override
             public void run() {
                 AnimationUtil.showViews(mButtonAdd);
@@ -188,7 +187,7 @@ public class BatHeaderView extends FrameLayout {
             mAnimationListener.onAddAnimationStarted();
         }
         ViewCompat.animate(mEditText).translationX(0).setDuration(Constant.ANIM_DURATION_MILLIS).start();
-        ViewCompat.animate(this).scaleX(1).translationY(getHeight() - dpToPx(20))
+        ViewCompat.animate(this).scaleX(1).translationY(getHeight() - getDimen(R.dimen.edit_text_offset))
                 .setInterpolator(new LinearInterpolator())
                 .setDuration(Constant.ANIM_DURATION_MILLIS).withEndAction(new Runnable() {
             @Override
@@ -219,9 +218,8 @@ public class BatHeaderView extends FrameLayout {
         }).start();
     }
 
-    private float dpToPx(int dp) {
-        DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, displayMetrics);
+    private int getDimen(@DimenRes int res) {
+        return getContext().getResources().getDimensionPixelOffset(res);
     }
 
     void setAnimationListener(AnimationListener animationListener) {

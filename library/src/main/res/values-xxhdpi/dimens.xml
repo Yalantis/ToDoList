@@ -3,4 +3,6 @@
     <dimen name="recycler_view_width">300dp</dimen>
     <dimen name="card_width">280dp</dimen>
     <dimen name="small_card_width">260dp</dimen>
+    <dimen name="cursor_offset">3dp</dimen>
+    <dimen name="edit_text_offset">20dp</dimen>
 </resources>

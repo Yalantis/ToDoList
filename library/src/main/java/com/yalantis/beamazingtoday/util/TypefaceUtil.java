@@ -9,8 +9,10 @@ import android.graphics.Typeface;
 public class TypefaceUtil {
 
     private static final String FONT_NAME = "font.otf";
+    private static final String AVENIR_FONT_NAME = "avenir.ttf";
 
     private static Typeface sTypeface;
+    private static Typeface sAvenirTypeface;
 
     public static Typeface getTypeface(Context context) {
         if (sTypeface == null) {
@@ -18,6 +20,14 @@ public class TypefaceUtil {
         }
 
         return sTypeface;
+    }
+
+    public static Typeface getAvenirTypeface(Context context) {
+        if (sAvenirTypeface == null) {
+            sAvenirTypeface = Typeface.createFromAsset(context.getAssets(), AVENIR_FONT_NAME);
+        }
+
+        return sAvenirTypeface;
     }
 
 }
