@@ -34,7 +34,7 @@ dependencies {
 
 ## How to use this library
 
-1. Add 'BatRecyclerView' to your xml layout
+Add 'BatRecyclerView' to your xml layout
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -76,7 +76,7 @@ dependencies {
 </LinearLayout>
 ```
 
-2. Create 'BatListener'
+Create 'BatListener'
 
 ```java
 private BatListener mListener = new BatListener() {
@@ -112,7 +112,7 @@ private BatListener mListener = new BatListener() {
     };
 ```
 
-3. Create 'BatAdapter'. Pass to its constructor list of models and 'BatListener'
+Create 'BatAdapter'. Pass to its constructor list of models and 'BatListener'. Note that your model should implement 'BatModel' interface
 
 ```java
 mAdapter = new BatAdapter(mGoals = new ArrayList<BatModel>() {{
@@ -135,9 +135,8 @@ mAdapter.setOnItemClickListener(new OnItemClickListener() {
       }
 });
 ```
-Note that your model should implement 'BatModel' interface
 
-4. Init your recycler view
+Init your recycler view
 
 ```java
 mRecyclerView.getView().setLayoutManager(new LinearLayoutManager(this));
