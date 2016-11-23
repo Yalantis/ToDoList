@@ -4,6 +4,8 @@
 [![](https://jitpack.io/v/yalantis/todolist.svg)](https://jitpack.io/#yalantis/todolist)
 [![Yalantis](https://raw.githubusercontent.com/Yalantis/PullToRefresh/develop/PullToRefreshDemo/Resources/badge_dark.png)](https://yalantis.com/?utm_source=github)
 
+<a href='https://play.google.com/store/apps/details?id=com.yalantis.beamazingtoday&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' height="70" width="180"/></a>
+
 [Live DEMO on appetize.io](https://appetize.io/app/c72udvwr5h7rgrbm23y2qrbbfc)
 
 Check this [project on dribbble](https://dribbble.com/shots/2589690-Be-amazing-today)
