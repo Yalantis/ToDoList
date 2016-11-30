@@ -38,7 +38,7 @@ dependencies {
 
 ## How to use this library
 
-Add 'BatRecyclerView' to your xml layout
+Add ```BatRecyclerView``` to your xml layout
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -80,7 +80,7 @@ Add 'BatRecyclerView' to your xml layout
 </LinearLayout>
 ```
 
-Create 'BatListener'
+Create ```BatListener```
 
 ```java
 private BatListener mListener = new BatListener() {
@@ -116,7 +116,7 @@ private BatListener mListener = new BatListener() {
     };
 ```
 
-Create 'BatAdapter'. Pass to its constructor list of models and 'BatListener'. Note that your model should implement 'BatModel' interface
+Create ```BatAdapter```. Pass to its constructor list of models and ```BatListener```. Note that your model should implement ```BatModel``` interface
 
 ```java
 mAdapter = new BatAdapter(mGoals = new ArrayList<BatModel>() {{
@@ -153,7 +153,7 @@ mRecyclerView.setAddItemListener(mListener);
 
 ## Extra
 
-You can use 'BatItemAnimator' to animate list items just like in our demo:
+You can use ```BatItemAnimator``` to animate list items just like in our demo:
 
 ```java
 mAnimator = new BatItemAnimator();
@@ -171,8 +171,8 @@ mAdapter = new BatAdapter(mGoals = new ArrayList<BatModel>() {{
 }}, mListener, mAnimator);
 mRecyclerView.getView().setItemAnimator(mAnimator);
 ```
-You need to pass the animator instance to 'BatRecyclerView' and to 'BatAdapter'.
-Also it's necessary to pass the position of the moved item in 'move()' callback:
+You need to pass the animator instance to ```BatRecyclerView``` and to ```BatAdapter```.
+Also it's necessary to pass the position of the moved item in ```move()``` callback:
 
 ```java
 @Override
@@ -191,6 +191,14 @@ public void move(int from, int to) {
 }
 ```
 For more usage examples please review sample app
+
+## Changelog
+
+### Version: 1.0.1
+
+* Cursor fixed. 
+* ```cursor_drawable``` attribute and ```setCursorDrawable(@DrawableRes int res)``` method added. 
+	Should be used instead of ```cursor_color``` attribute and ```setCursorColor(@ColorInt int color)``` method 		respectively
 
 ## Let us know!
 
