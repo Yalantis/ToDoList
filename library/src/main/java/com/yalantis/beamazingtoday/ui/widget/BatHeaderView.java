@@ -24,6 +24,7 @@ import com.yalantis.beamazingtoday.R;
 import com.yalantis.beamazingtoday.R2;
 import com.yalantis.beamazingtoday.listeners.AnimationListener;
 import com.yalantis.beamazingtoday.listeners.BatListener;
+import com.yalantis.beamazingtoday.ui.callback.EditListener;
 import com.yalantis.beamazingtoday.util.AnimationUtil;
 import com.yalantis.beamazingtoday.util.TypefaceUtil;
 
@@ -35,9 +36,7 @@ import rx.functions.Action1;
 /**
  * Created by galata on 15.07.16.
  */
-public class BatHeaderView extends FrameLayout {
-
-    static final float HEADER_TRANSLATION_Y = 30;
+public class BatHeaderView extends FrameLayout implements EditListener {
 
     @BindView(R2.id.add_view)
     AddView mAddView;
@@ -67,6 +66,7 @@ public class BatHeaderView extends FrameLayout {
         super(context, attrs, defStyleAttr);
         LayoutInflater.from(context).inflate(R.layout.bat_header_view, this, true);
         ButterKnife.bind(this);
+        mEditText.setEditListener(this);
     }
 
     @Override
@@ -81,7 +81,7 @@ public class BatHeaderView extends FrameLayout {
         mButtonAdd.setTypeface(TypefaceUtil.getTypeface(getContext()));
     }
 
-    @OnClick({R2.id.root, R2.id.add_view, R2.id.clickable_view})
+    @OnClick({R2.id.root, R2.id.add_view})
     void onClick() {
         if (mEditText.isEnabled()) {
             AnimationUtil.showKeyboard(getContext(), mEditText.getView());
@@ -93,11 +93,11 @@ public class BatHeaderView extends FrameLayout {
     void animateIncreasing() {
         mEditText.clear();
         mRoot.setBackgroundResource(R.drawable.header_background_rounded);
-        ViewCompat.animate(this).scaleX(1.1f).translationY(HEADER_TRANSLATION_Y)
+        ViewCompat.animate(this).scaleX(1.1f).translationY(getDimen(R.dimen.header_translation))
                 .setDuration(Constant.ANIM_DURATION_MILLIS).start();
         AnimationUtil.hide(mDivider);
         AnimationUtil.scaleXViews(0.9f, mButtonAdd, mEditText);
-        AnimationUtil.moveX(mEditText, -mAddView.getWidth() - getDimen(R.dimen.cursor_offset), new Runnable() {
+        AnimationUtil.moveX(mEditText, -mAddView.getWidth() - getDimen(R.dimen.cursor_width) / 2, new Runnable() {
             @Override
             public void run() {
                 AnimationUtil.showViews(mButtonAdd);
@@ -107,7 +107,6 @@ public class BatHeaderView extends FrameLayout {
         mAddView.rotate(new Runnable() {
             @Override
             public void run() {
-                mEditText.moveToStart();
                 mEditText.showCursor();
                 mAddView.hide();
                 mEditText.setEnabled(true);
@@ -155,7 +154,7 @@ public class BatHeaderView extends FrameLayout {
         setScaleY(0);
         setPivotY(0);
         setPivotY(getY() + getHeight());
-        setTranslationY(HEADER_TRANSLATION_Y);
+        setTranslationY(getDimen(R.dimen.header_translation));
         setAlpha(1);
 
         ViewCompat.animate(this).scaleY(1.1f).setInterpolator(new OvershootInterpolator(2)).setDuration(Constant.ANIM_DURATION_MILLIS)
@@ -186,7 +185,8 @@ public class BatHeaderView extends FrameLayout {
         if (mAnimationListener != null) {
             mAnimationListener.onAddAnimationStarted();
         }
-        ViewCompat.animate(mEditText).translationX(0).setDuration(Constant.ANIM_DURATION_MILLIS).start();
+        ViewCompat.animate(mEditText).translationX(-getDimen(R.dimen.edit_text_vertical_offset))
+                .setDuration(Constant.ANIM_DURATION_MILLIS).start();
         ViewCompat.animate(this).scaleX(1).translationY(getHeight() - getDimen(R.dimen.edit_text_offset))
                 .setInterpolator(new LinearInterpolator())
                 .setDuration(Constant.ANIM_DURATION_MILLIS).withEndAction(new Runnable() {
@@ -253,4 +253,10 @@ public class BatHeaderView extends FrameLayout {
     void setAddButtonColor(ColorStateList list) {
         mButtonAdd.setTextColor(list);
     }
+
+    @Override
+    public void onStartEdit() {
+        animateIncreasing();
+    }
+
 }

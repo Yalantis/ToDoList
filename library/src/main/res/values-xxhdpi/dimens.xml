@@ -5,4 +5,5 @@
     <dimen name="small_card_width">260dp</dimen>
     <dimen name="cursor_offset">3dp</dimen>
     <dimen name="edit_text_offset">20dp</dimen>
+    <dimen name="edit_text_vertical_offset">1dp</dimen>
 </resources>

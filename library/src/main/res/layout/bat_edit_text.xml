@@ -1,32 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="@dimen/list_item_height">
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/cursor"
         style="@style/Cursor"
-        android:visibility="invisible"
-        android:layout_gravity="center_vertical"/>
+        android:layout_gravity="center_vertical"
+        android:visibility="invisible" />
 
-    <EditText
+    <com.yalantis.beamazingtoday.ui.widget.WatcherEditText
         android:id="@+id/edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:enabled="false"
-        android:textColor="@color/colorTexts"
-        android:background="@color/colorTransparent"
-        android:hint="@string/str_add_goal"
         android:layout_gravity="center_vertical"
+        android:background="@color/colorTransparent"
+        android:enabled="false"
+        android:hint="@string/str_add_goal"
         android:paddingLeft="5dp"
+        android:singleLine="true"
+        android:textColor="@color/colorTexts"
         android:textColorHint="@color/colorGrey"
-        android:textCursorDrawable="@color/colorTransparent"
+        android:textCursorDrawable="@drawable/ic_cursor_drawable"
         android:textSize="@dimen/text_size" />
-
-    <View
-        android:id="@+id/clickable_view"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/list_item_height"/>
 
 </FrameLayout>

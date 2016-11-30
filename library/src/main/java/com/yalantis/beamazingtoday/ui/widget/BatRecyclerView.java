@@ -5,6 +5,7 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
+import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
@@ -111,8 +112,13 @@ public class BatRecyclerView extends FrameLayout {
         mHeaderView.mEditText.setTextColor(color);
     }
 
+    @Deprecated
     public void setCursorColor(@ColorInt int color) {
         mHeaderView.mEditText.setCursorColor(color);
+    }
+
+    public void setCursorDrawable(@DrawableRes int res) {
+        mHeaderView.mEditText.setCursorDrawable(res);
     }
 
     public void setDividerColor(@ColorInt int color) {
@@ -151,10 +157,14 @@ public class BatRecyclerView extends FrameLayout {
         mHeaderView.setAddButtonColor(color);
     }
 
+    private int getDimen(@DimenRes int res) {
+        return getContext().getResources().getDimensionPixelOffset(res);
+    }
+
     class AnimationListenerImpl implements AnimationListener {
         @Override
         public void onIncreaseAnimationStarted() {
-            ViewCompat.animate(mRecyclerView).translationY(BatHeaderView.HEADER_TRANSLATION_Y * 2)
+            ViewCompat.animate(mRecyclerView).translationY(getDimen(R.dimen.header_translation) * 2)
                     .setDuration(Constant.ANIM_DURATION_MILLIS).start();
         }
 

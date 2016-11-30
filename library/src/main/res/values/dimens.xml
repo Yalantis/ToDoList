@@ -3,8 +3,10 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="add_view_size">22dp</dimen>
-    <dimen name="cursor_width">4dp</dimen>
+    <dimen name="add_view_size">24dp</dimen>
+    <dimen name="header_translation">16dp</dimen>
+    <dimen name="cursor_height">24dp</dimen>
+    <dimen name="cursor_width">4.5dp</dimen>
     <dimen name="check_size">22dp</dimen>
     <dimen name="check_margin">16dp</dimen>
     <dimen name="edit_text_margin">6dp</dimen>

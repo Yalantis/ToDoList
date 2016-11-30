@@ -3,37 +3,41 @@ package com.yalantis.beamazingtoday.ui.widget;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.support.annotation.ColorInt;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.support.v7.widget.AppCompatImageView;
-import android.text.Layout;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
+import android.view.MotionEvent;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.jakewharton.rxbinding.widget.RxTextView;
 import com.yalantis.beamazingtoday.R;
 import com.yalantis.beamazingtoday.R2;
+import com.yalantis.beamazingtoday.ui.callback.EditListener;
+import com.yalantis.beamazingtoday.ui.callback.OnCursorMovedListener;
 import com.yalantis.beamazingtoday.util.TypefaceUtil;
+
+import java.lang.reflect.Field;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import rx.functions.Action1;
 
 /**
  * Created by galata on 15.07.16.
  */
-public class BatEditText extends FrameLayout {
+public class BatEditText extends FrameLayout implements OnCursorMovedListener {
 
     @BindView(R2.id.cursor)
     AppCompatImageView mCursor;
     @BindView(R2.id.edit_text)
-    EditText mEditText;
+    WatcherEditText mEditText;
+
+    private boolean isInEditMode;
+    private EditListener mListener;
 
     public BatEditText(Context context) {
         this(context, null);
@@ -47,22 +51,17 @@ public class BatEditText extends FrameLayout {
         super(context, attrs, defStyleAttr);
         LayoutInflater.from(context).inflate(R.layout.bat_edit_text, this, true);
         ButterKnife.bind(this);
+        mEditText.setCursorListener(this);
     }
 
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        RxTextView.textChanges(mEditText).subscribe(new Action1<CharSequence>() {
-            @Override
-            public void call(CharSequence charSequence) {
-                if (!TextUtils.isEmpty(charSequence)) {
-                    moveCursor();
-                } else {
-                    moveToStart();
-                }
-            }
-        });
         mEditText.setTypeface(TypefaceUtil.getTypeface(getContext()));
+    }
+
+    void setEditListener(EditListener listener) {
+        mListener = listener;
     }
 
     public EditText getView() {
@@ -78,6 +77,7 @@ public class BatEditText extends FrameLayout {
         mEditText.clearFocus();
         mCursor.clearAnimation();
         mCursor.setVisibility(GONE);
+        isInEditMode = false;
     }
 
     public boolean isEnabled() {
@@ -90,18 +90,15 @@ public class BatEditText extends FrameLayout {
     }
 
     public void showCursor() {
+        isInEditMode = true;
         mCursor.setVisibility(VISIBLE);
         startBlinking();
+        mEditText.setCursorVisible(false);
     }
 
     private void startBlinking() {
         Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.blinking_anim);
         mCursor.startAnimation(animation);
-    }
-
-    public void moveToStart() {
-        mCursor.setX(mEditText.getX());
-        mCursor.setY(mEditText.getY());
     }
 
     public String getText() {
@@ -116,22 +113,6 @@ public class BatEditText extends FrameLayout {
         mEditText.clearFocus();
     }
 
-    private void moveCursor() {
-        mCursor.setX(getCursorPosition() + mCursor.getWidth() * 1.5f);
-        mCursor.setY(mEditText.getY());
-    }
-
-    private float getCursorPosition() {
-        Layout layout = mEditText.getLayout();
-
-        if (layout == null) {
-            return 0;
-        }
-
-        int position = mEditText.getSelectionStart();
-        return layout.getPrimaryHorizontal(position);
-    }
-
     void setHintColor(@ColorInt int color) {
         mEditText.setHintTextColor(color);
     }
@@ -144,6 +125,16 @@ public class BatEditText extends FrameLayout {
         mCursor.setSupportBackgroundTintList(ColorStateList.valueOf(color));
     }
 
+    void setCursorDrawable(@DrawableRes int res) {
+        try {
+            Field field = TextView.class.getDeclaredField("mCursorDrawableRes");
+            field.setAccessible(true);
+            field.set(mEditText, res);
+            mCursor.setImageResource(res);
+        } catch (Exception ignored) {
+        }
+    }
+
     void setHint(@StringRes int hint) {
         mEditText.setHint(hint);
     }
@@ -151,4 +142,33 @@ public class BatEditText extends FrameLayout {
     void setHint(String hint) {
         mEditText.setHint(hint);
     }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (isInEditMode) {
+            mEditText.onTouchEvent(event);
+            onCursorMoved();
+        } else if (mListener != null) {
+            mListener.onStartEdit();
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        return true;
+    }
+
+    @Override
+    public void onCursorMoved() {
+        boolean isOnStart = mEditText.getSelectionStart() == 0;
+        if (isOnStart) {
+            startBlinking();
+        } else {
+            mCursor.clearAnimation();
+        }
+        mEditText.setCursorVisible(!isOnStart);
+        mCursor.setVisibility(isOnStart ? VISIBLE : INVISIBLE);
+    }
+
 }
