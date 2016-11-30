@@ -75,6 +75,10 @@ public class BatRecyclerView extends FrameLayout {
             setAddButtonColor(array.getColorStateList(R.styleable.BatRecyclerView_add_button_color));
         }
 
+        if (array.hasValue(R.styleable.BatRecyclerView_cursor_drawable)) {
+            setCursorDrawable(array.getResourceId(R.styleable.BatRecyclerView_cursor_drawable, R.drawable.ic_cursor_drawable));
+        }
+
         array.recycle();
     }
 

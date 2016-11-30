@@ -6,6 +6,7 @@
         <attr name="show_divider" format="boolean" />
         <attr name="divider_color" format="color" />
         <attr name="cursor_color" format="color" />
+        <attr name="cursor_drawable" format="reference" />
         <attr name="plus_color" format="color" />
         <attr name="radio_button_color" format="color" />
         <attr name="radio_button_res" format="reference" />
