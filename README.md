@@ -32,7 +32,7 @@ allprojects {
 Add the dependency:
 ```Groovy
 dependencies {
-	compile 'com.github.yalantis:todolist:v1.0'
+	compile 'com.github.yalantis:todolist:v1.0.1'
 }
 ```
 
