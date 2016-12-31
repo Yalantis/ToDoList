@@ -20,7 +20,6 @@ import com.yalantis.beamazingtoday.ui.callback.BatCallback;
 import com.yalantis.beamazingtoday.ui.widget.BatRecyclerView;
 import com.yalantis.beamazingtoday.util.TypefaceUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,7 +30,10 @@ public class ExampleActivity extends AppCompatActivity implements BatListener, O
     private BatRecyclerView mRecyclerView;
     private BatAdapter mAdapter;
     private List<BatModel> mGoals;
+
     private BatItemAnimator mAnimator;
+
+    private GoalDatabaseOpenHelper mDatabaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,19 +49,11 @@ public class ExampleActivity extends AppCompatActivity implements BatListener, O
         mRecyclerView = (BatRecyclerView) findViewById(R.id.bat_recycler_view);
         mAnimator = new BatItemAnimator();
 
+        mDatabaseHelper = GoalDatabaseOpenHelper.getInstance(this);
+        mGoals = mDatabaseHelper.getGoals();
+
         mRecyclerView.getView().setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.getView().setAdapter(mAdapter = new BatAdapter(mGoals = new ArrayList<BatModel>() {{
-            add(new Goal("first"));
-            add(new Goal("second"));
-            add(new Goal("third"));
-            add(new Goal("fourth"));
-            add(new Goal("fifth"));
-            add(new Goal("sixth"));
-            add(new Goal("seventh"));
-            add(new Goal("eighth"));
-            add(new Goal("ninth"));
-            add(new Goal("tenth"));
-        }}, this, mAnimator).setOnItemClickListener(this).setOnOutsideClickListener(this));
+        mRecyclerView.getView().setAdapter(mAdapter = new BatAdapter(mGoals, this, mAnimator).setOnItemClickListener(this).setOnOutsideClickListener(this));
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new BatCallback(this));
         itemTouchHelper.attachToRecyclerView(mRecyclerView.getView());
@@ -76,12 +70,18 @@ public class ExampleActivity extends AppCompatActivity implements BatListener, O
 
     @Override
     public void add(String string) {
-        mGoals.add(0, new Goal(string));
+        Goal goal = new Goal(string);
+        mDatabaseHelper.addGoal(goal);
+
+        mGoals.add(0, goal);
         mAdapter.notify(AnimationType.ADD, 0);
     }
 
     @Override
     public void delete(int position) {
+        Goal goal = (Goal)mGoals.get(position);
+        mDatabaseHelper.removeGoal(goal);
+
         mGoals.remove(position);
         mAdapter.notify(AnimationType.REMOVE, position);
     }
@@ -89,6 +89,10 @@ public class ExampleActivity extends AppCompatActivity implements BatListener, O
     @Override
     public void move(int from, int to) {
         if (from >= 0 && to >= 0) {
+            Goal goal = (Goal)mGoals.get(from);
+            goal.setChecked(!goal.isChecked());
+            mDatabaseHelper.updateCheckStatus(goal);
+
             mAnimator.setPosition(to);
             BatModel model = mGoals.get(from);
             mGoals.remove(model);
