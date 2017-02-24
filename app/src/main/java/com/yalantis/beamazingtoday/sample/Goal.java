@@ -11,8 +11,16 @@ public class Goal implements BatModel {
 
     private boolean isChecked;
 
+    private int id;
+
     public Goal(String name) {
         this.name = name;
+    }
+
+    public Goal(int id, String name, boolean isChecked) {
+        this.id = id;
+        this.name = name;
+        this.isChecked = isChecked;
     }
 
     public String getName() {
@@ -26,6 +34,10 @@ public class Goal implements BatModel {
     public void setChecked(boolean checked) {
         isChecked = checked;
     }
+
+    public int getId() { return id;}
+
+    public void setId(int id) { this.id = id; }
 
     @Override
     public boolean isChecked() {
