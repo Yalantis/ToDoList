@@ -20,7 +20,6 @@ android {
 }
 
 dependencies {
-//    classpath 'com.jakewharton:butterknife-gradle-plugin:8.8.1'
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:26.0.2'
     compile project(':library')
