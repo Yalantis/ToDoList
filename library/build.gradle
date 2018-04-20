@@ -21,16 +21,16 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:26.0.2'
-    compile 'com.android.support:recyclerview-v7:26.0.2'
-    compile 'com.android.support:design:26.0.2'
+    implementation 'com.android.support:appcompat-v7:26.0.2'
+    api 'com.android.support:recyclerview-v7:26.0.2'
+    api 'com.android.support:design:26.0.2'
 
     //RX
-    compile('io.reactivex:rxandroid:1.1.0') {
+    implementation('io.reactivex:rxandroid:1.1.0') {
         exclude module: 'rxjava'
     }
-    compile 'io.reactivex:rxjava:1.1.0'
-    compile 'com.jakewharton.rxbinding:rxbinding:0.4.0'
+    implementation 'io.reactivex:rxjava:1.1.0'
+    implementation 'com.jakewharton.rxbinding:rxbinding:0.4.0'
     implementation 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 }
