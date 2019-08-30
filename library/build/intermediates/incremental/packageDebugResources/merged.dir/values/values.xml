@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorBlue">#08ADEF</color>
+    <color name="colorBlueLight">#BBCEE4</color>
+    <color name="colorBlueLightBackground">#94DEFF</color>
+    <color name="colorButtonDisabled">#EFEFF1</color>
+    <color name="colorButtonEnabled">#96CCEB</color>
+    <color name="colorDivider">#EEEEF0</color>
+    <color name="colorGrey">#DEDEDE</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorTexts">#383939</color>
+    <color name="colorTransparent">#00ffffff</color>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="add_button_text_size">20sp</dimen>
+    <dimen name="add_view_padding">10dp</dimen>
+    <dimen name="add_view_size">24dp</dimen>
+    <dimen name="background_view_margin_top">20dp</dimen>
+    <dimen name="check_margin">16dp</dimen>
+    <dimen name="check_size">22dp</dimen>
+    <dimen name="corner_radius">2dp</dimen>
+    <dimen name="cursor_height">24dp</dimen>
+    <dimen name="cursor_width">4.5dp</dimen>
+    <dimen name="divider_height">0.7dp</dimen>
+    <dimen name="edit_text_margin">6dp</dimen>
+    <dimen name="header_translation">16dp</dimen>
+    <dimen name="list_item_height">60dp</dimen>
+    <dimen name="list_item_padding">10dp</dimen>
+    <dimen name="recycler_view_margin_top">80dp</dimen>
+    <dimen name="recycler_view_width">360dp</dimen>
+    <dimen name="text_size">18sp</dimen>
+    <string name="app_name">Be awesome today</string>
+    <string name="str_add">Add</string>
+    <string name="str_add_goal">Add new goal</string>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="Cursor">
+        <item name="android:layout_width">@dimen/cursor_width</item>
+        <item name="android:layout_height">@dimen/cursor_height</item>
+        <item name="android:background">@drawable/ic_cursor_drawable</item>
+    </style>
+    <declare-styleable name="BatRecyclerView">
+        <attr format="color" name="list_background"/>
+        <attr format="color" name="hint_color"/>
+        <attr format="boolean" name="show_divider"/>
+        <attr format="color" name="divider_color"/>
+        <attr format="color" name="cursor_color"/>
+        <attr format="reference" name="cursor_drawable"/>
+        <attr format="color" name="plus_color"/>
+        <attr format="color" name="radio_button_color"/>
+        <attr format="reference" name="radio_button_res"/>
+        <attr format="reference" name="add_button_color"/>
+        <attr format="string" name="hint"/>
+    </declare-styleable>
+</resources>

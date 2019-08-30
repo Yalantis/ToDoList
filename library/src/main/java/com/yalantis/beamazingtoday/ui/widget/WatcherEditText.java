@@ -2,15 +2,11 @@ package com.yalantis.beamazingtoday.ui.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.EditText;
 
 import com.yalantis.beamazingtoday.ui.callback.OnCursorMovedListener;
 
-/**
- * Created by irinagalata on 11/29/16.
- */
 
-public class WatcherEditText extends EditText {
+public class WatcherEditText extends androidx.appcompat.widget.AppCompatEditText {
 
     private OnCursorMovedListener mListener;
 

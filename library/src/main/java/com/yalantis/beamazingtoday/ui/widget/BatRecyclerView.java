@@ -3,39 +3,31 @@ package com.yalantis.beamazingtoday.ui.widget;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
-import android.support.annotation.ColorInt;
-import android.support.annotation.ColorRes;
-import android.support.annotation.DimenRes;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.StringRes;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.AppCompatImageView;
-import android.support.v7.widget.RecyclerView;
+import android.os.Build;
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.annotation.DimenRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import com.yalantis.beamazingtoday.Constant;
 import com.yalantis.beamazingtoday.R;
-import com.yalantis.beamazingtoday.R2;
 import com.yalantis.beamazingtoday.listeners.AnimationListener;
 import com.yalantis.beamazingtoday.listeners.BatListener;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
-
-/**
- * Created by galata on 15.07.16.
- */
 public class BatRecyclerView extends FrameLayout {
 
-    @BindView(R2.id.recycler_view)
     RecyclerView mRecyclerView;
-    @BindView(R2.id.header_view)
     BatHeaderView mHeaderView;
-    @BindView(R2.id.view)
     AppCompatImageView mBackground;
 
     public BatRecyclerView(Context context) {
@@ -48,9 +40,10 @@ public class BatRecyclerView extends FrameLayout {
 
     public BatRecyclerView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        LayoutInflater.from(context).inflate(R.layout.bat_recycler_view, this, true);
-        ButterKnife.bind(this);
-
+        View view = LayoutInflater.from(context).inflate(R.layout.bat_recycler_view, this, true);
+        mRecyclerView = view.findViewById(R.id.recycler_view);
+        mHeaderView = view.findViewById(R.id.header_view);
+        mBackground = view.findViewById(R.id.view);
         obtainAttributes(context, attrs);
     }
 
@@ -97,6 +90,7 @@ public class BatRecyclerView extends FrameLayout {
     }
 
     public void revertAnimation() {
+
         mHeaderView.animateDecreasing();
     }
 
@@ -104,8 +98,11 @@ public class BatRecyclerView extends FrameLayout {
         return mRecyclerView;
     }
 
+
     public void setListBackgroundColor(@ColorInt int color) {
-        mBackground.setSupportBackgroundTintList(ColorStateList.valueOf(color));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mBackground.setBackgroundTintList(ColorStateList.valueOf(color));
+        }
     }
 
     public void setHintColor(@ColorInt int color) {

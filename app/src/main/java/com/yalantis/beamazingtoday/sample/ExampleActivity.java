@@ -1,10 +1,10 @@
 package com.yalantis.beamazingtoday.sample;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.Toolbar;
-import android.support.v7.widget.helper.ItemTouchHelper;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,13 +38,13 @@ public class ExampleActivity extends AppCompatActivity implements BatListener, O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_example);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
 
         ((TextView) findViewById(R.id.text_title)).setTypeface(TypefaceUtil.getAvenirTypeface(this));
 
-        mRecyclerView = (BatRecyclerView) findViewById(R.id.bat_recycler_view);
+        mRecyclerView = findViewById(R.id.bat_recycler_view);
         mAnimator = new BatItemAnimator();
 
         mRecyclerView.getView().setLayoutManager(new LinearLayoutManager(this));

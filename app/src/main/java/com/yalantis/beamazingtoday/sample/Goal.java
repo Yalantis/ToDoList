@@ -2,9 +2,7 @@ package com.yalantis.beamazingtoday.sample;
 
 import com.yalantis.beamazingtoday.interfaces.BatModel;
 
-/**
- * Created by galata on 22.08.16.
- */
+
 public class Goal implements BatModel {
 
     private String name;
