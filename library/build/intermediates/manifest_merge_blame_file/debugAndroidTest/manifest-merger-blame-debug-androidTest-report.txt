@@ -3,40 +3,40 @@
 3    package="com.yalantis.beamazingtoday.test" >
 4
 5    <uses-sdk
-5-->/Users/mromero/Documents/androidProjects/ToDoList/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6447676870693180443.xml:5:5-74
+5-->/Users/mromero/Documents/androidProjects/ToDoList/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger3367075625844028156.xml:5:5-74
 6        android:minSdkVersion="16"
-6-->/Users/mromero/Documents/androidProjects/ToDoList/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6447676870693180443.xml:5:15-41
+6-->/Users/mromero/Documents/androidProjects/ToDoList/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger3367075625844028156.xml:5:15-41
 7        android:targetSdkVersion="28" />
-7-->/Users/mromero/Documents/androidProjects/ToDoList/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6447676870693180443.xml:5:42-71
+7-->/Users/mromero/Documents/androidProjects/ToDoList/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger3367075625844028156.xml:5:42-71
 8
 9    <instrumentation
-9-->/Users/mromero/Documents/androidProjects/ToDoList/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6447676870693180443.xml:11:5-15:82
+9-->/Users/mromero/Documents/androidProjects/ToDoList/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger3367075625844028156.xml:11:5-15:82
 10        android:name="android.test.InstrumentationTestRunner"
-10-->/Users/mromero/Documents/androidProjects/ToDoList/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6447676870693180443.xml:11:22-75
+10-->/Users/mromero/Documents/androidProjects/ToDoList/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger3367075625844028156.xml:11:22-75
 11        android:functionalTest="false"
-11-->/Users/mromero/Documents/androidProjects/ToDoList/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6447676870693180443.xml:14:22-52
+11-->/Users/mromero/Documents/androidProjects/ToDoList/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger3367075625844028156.xml:14:22-52
 12        android:handleProfiling="false"
-12-->/Users/mromero/Documents/androidProjects/ToDoList/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6447676870693180443.xml:13:22-53
+12-->/Users/mromero/Documents/androidProjects/ToDoList/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger3367075625844028156.xml:13:22-53
 13        android:label="Tests for com.yalantis.beamazingtoday.test"
-13-->/Users/mromero/Documents/androidProjects/ToDoList/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6447676870693180443.xml:15:22-80
+13-->/Users/mromero/Documents/androidProjects/ToDoList/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger3367075625844028156.xml:15:22-80
 14        android:targetPackage="com.yalantis.beamazingtoday.test" />
-14-->/Users/mromero/Documents/androidProjects/ToDoList/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6447676870693180443.xml:12:22-78
+14-->/Users/mromero/Documents/androidProjects/ToDoList/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger3367075625844028156.xml:12:22-78
 15
 16    <application
-16-->/Users/mromero/Documents/androidProjects/ToDoList/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6447676870693180443.xml:7:5-9:19
+16-->/Users/mromero/Documents/androidProjects/ToDoList/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger3367075625844028156.xml:7:5-9:19
 17        android:allowBackup="true"
 17-->[__tested_artifact__::library] /Users/mromero/Documents/androidProjects/ToDoList/library/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:9-35
 18        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
 18-->[com.android.support:support-compat:28.0.0] /Users/mromero/.gradle/caches/transforms-2/files-2.1/0c7e240e9a03606880fba5203a2695fc/support-compat-28.0.0/AndroidManifest.xml:22:18-91
 19        android:debuggable="true"
-19-->/Users/mromero/Documents/androidProjects/ToDoList/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6447676870693180443.xml:7:18-43
+19-->/Users/mromero/Documents/androidProjects/ToDoList/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger3367075625844028156.xml:7:18-43
 20        android:label="@string/app_name"
 20-->[__tested_artifact__::library] /Users/mromero/Documents/androidProjects/ToDoList/library/build/intermediates/library_manifest/debug/AndroidManifest.xml:13:9-41
 21        android:theme="@style/AppTheme" >
 21-->[__tested_artifact__::library] /Users/mromero/Documents/androidProjects/ToDoList/library/build/intermediates/library_manifest/debug/AndroidManifest.xml:14:9-40
 22        <uses-library android:name="android.test.runner" />
-22-->/Users/mromero/Documents/androidProjects/ToDoList/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6447676870693180443.xml:8:9-60
-22-->/Users/mromero/Documents/androidProjects/ToDoList/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6447676870693180443.xml:8:23-57
+22-->/Users/mromero/Documents/androidProjects/ToDoList/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger3367075625844028156.xml:8:9-60
+22-->/Users/mromero/Documents/androidProjects/ToDoList/library/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger3367075625844028156.xml:8:23-57
 23    </application>
 24
 25</manifest>

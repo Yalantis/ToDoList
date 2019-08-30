@@ -54,9 +54,27 @@ public class BatHeaderView extends FrameLayout implements EditListener {
         super(context, attrs, defStyleAttr);
         View view = LayoutInflater.from(context).inflate(R.layout.bat_header_view, this, true);
         mAddView = view.findViewById(R.id.add_view);
+        mAddView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickRoot();
+            }
+        });
         mEditText = view.findViewById(R.id.bat_edit_text);
         mButtonAdd = view.findViewById(R.id.button_add);
+        mButtonAdd.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addItem();
+            }
+        });
         mRoot = view.findViewById(R.id.root);
+        mRoot.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickRoot();
+            }
+        });
         mRadioButton = view.findViewById(R.id.radio_button);
         mDivider = view.findViewById(R.id.divider);
         mEditText.setEditListener(this);
@@ -74,8 +92,7 @@ public class BatHeaderView extends FrameLayout implements EditListener {
         mButtonAdd.setTypeface(TypefaceUtil.getTypeface(getContext()));
     }
 
-    //@OnClick({R2.id.root, R2.id.add_view})
-    void onClick() {
+    void onClickRoot() {
         if (mEditText.isEnabled()) {
             AnimationUtil.showKeyboard(getContext(), mEditText.getView());
         } else {
@@ -163,7 +180,6 @@ public class BatHeaderView extends FrameLayout implements EditListener {
                 }).start();
     }
 
-    //@OnClick(R2.id.button_add)
     void addItem() {
         if (mAddItemListener != null) {
             mAddItemListener.add(mEditText.getText());

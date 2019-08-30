@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="card_width">280dp</dimen>
+    <dimen name="cursor_offset">3dp</dimen>
+    <dimen name="edit_text_offset">20dp</dimen>
+    <dimen name="edit_text_vertical_offset">1dp</dimen>
+    <dimen name="recycler_view_width">300dp</dimen>
+    <dimen name="small_card_width">260dp</dimen>
+</resources>
