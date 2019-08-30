@@ -2,6 +2,7 @@ package com.yalantis.beamazingtoday.ui.widget;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatImageView;
@@ -10,26 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 
-import com.yalantis.beamazingtoday.R2;
 import com.yalantis.beamazingtoday.util.AnimationUtil;
 import com.yalantis.beamazingtoday.R;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
-/**
- * Created by galata on 14.07.16.
- */
 public class AddView extends FrameLayout {
 
     private static final int START_POSITION = 90;
     private static final int END_POSITION = 180;
 
-    @BindView(R2.id.view_horizontal)
     AppCompatImageView mHorizontalView;
-    @BindView(R2.id.view_vertical)
     AppCompatImageView mVerticalView;
 
     public AddView(Context context) {
@@ -42,8 +33,9 @@ public class AddView extends FrameLayout {
 
     public AddView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        LayoutInflater.from(context).inflate(R.layout.bat_add_view, this, true);
-        ButterKnife.bind(this);
+        View view = LayoutInflater.from(context).inflate(R.layout.bat_add_view, this, true);
+        mHorizontalView = view.findViewById(R.id.view_horizontal);
+        mVerticalView = view.findViewById(R.id.view_vertical);
     }
 
     public void rotate(@Nullable Runnable endAction) {
@@ -71,7 +63,11 @@ public class AddView extends FrameLayout {
 
     void setColor(@ColorInt int color) {
         ColorStateList list = ColorStateList.valueOf(color);
-        mHorizontalView.setSupportBackgroundTintList(list);
-        mVerticalView.setSupportBackgroundTintList(list);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mHorizontalView.setBackgroundTintList(ColorStateList.valueOf(color));
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mVerticalView.setBackgroundTintList(ColorStateList.valueOf(color));
+        }
     }
 }

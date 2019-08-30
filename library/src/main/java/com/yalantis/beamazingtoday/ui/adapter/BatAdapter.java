@@ -15,7 +15,6 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.yalantis.beamazingtoday.R;
-import com.yalantis.beamazingtoday.R2;
 import com.yalantis.beamazingtoday.interfaces.AnimationType;
 import com.yalantis.beamazingtoday.interfaces.BatModel;
 import com.yalantis.beamazingtoday.listeners.BatListener;
@@ -27,9 +26,6 @@ import com.yalantis.beamazingtoday.util.TypefaceUtil;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by galata on 15.07.16.
@@ -177,28 +173,36 @@ public class BatAdapter extends RecyclerView.Adapter<BatAdapter.ViewHolder> impl
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R2.id.root)
+
         public View rootView;
-        @BindView(R2.id.text_view)
         TextView textView;
-        @BindView(R2.id.radio_button)
         AppCompatCheckBox radioButton;
-        @BindView(R2.id.divider)
         View divider;
+        View clickeableView;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            this.rootView = itemView.findViewById(R.id.root);
+            this.textView = itemView.findViewById(R.id.text_view);
+            this.radioButton = itemView.findViewById(R.id.radio_button);
+            this.divider = itemView.findViewById(R.id.divider);
+            this.clickeableView = itemView.findViewById(R.id.clickable_view);
+            this.clickeableView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onCheck();
+                }
+            });
         }
 
-        @OnClick(R2.id.clickable_view)
+
         void onCheck() {
             if (!mIsBusy) {
                 radioButton.toggle();
             }
         }
 
-        @OnClick({R2.id.root, R2.id.text_view})
+        //@OnClick({R2.id.root, R2.id.text_view})
         void onClick() {
             if (mItemClickListener != null) {
                 BatModel item = (BatModel) radioButton.getTag();
@@ -206,7 +210,7 @@ public class BatAdapter extends RecyclerView.Adapter<BatAdapter.ViewHolder> impl
             }
         }
 
-        @OnClick(R2.id.full_list_item)
+        //@OnClick(R2.id.full_list_item)
         void onOutsideClicked() {
             if (mOnOutsideClickedListener != null) {
                 mOnOutsideClickedListener.onOutsideClicked();

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/add_view_size"
+    android:layout_height="@dimen/add_view_size">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/view_vertical"
+        style="@style/Cursor"
+        android:layout_gravity="center" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/view_horizontal"
+        style="@style/Cursor"
+        android:layout_gravity="center"
+        android:rotation="90" />
+
+</FrameLayout>

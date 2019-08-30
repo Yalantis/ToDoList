@@ -2,6 +2,7 @@ package com.yalantis.beamazingtoday.ui.widget;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
@@ -9,6 +10,7 @@ import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
@@ -16,24 +18,15 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.yalantis.beamazingtoday.R;
-import com.yalantis.beamazingtoday.R2;
 import com.yalantis.beamazingtoday.ui.callback.EditListener;
 import com.yalantis.beamazingtoday.ui.callback.OnCursorMovedListener;
 import com.yalantis.beamazingtoday.util.TypefaceUtil;
 
 import java.lang.reflect.Field;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
-/**
- * Created by galata on 15.07.16.
- */
 public class BatEditText extends FrameLayout implements OnCursorMovedListener {
 
-    @BindView(R2.id.cursor)
     AppCompatImageView mCursor;
-    @BindView(R2.id.edit_text)
     WatcherEditText mEditText;
 
     private boolean isInEditMode;
@@ -49,8 +42,9 @@ public class BatEditText extends FrameLayout implements OnCursorMovedListener {
 
     public BatEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        LayoutInflater.from(context).inflate(R.layout.bat_edit_text, this, true);
-        ButterKnife.bind(this);
+        View view = LayoutInflater.from(context).inflate(R.layout.bat_edit_text, this, true);
+        mCursor = view.findViewById(R.id.cursor);
+        mEditText = view.findViewById(R.id.edit_text);
         mEditText.setCursorListener(this);
     }
 
@@ -122,7 +116,9 @@ public class BatEditText extends FrameLayout implements OnCursorMovedListener {
     }
 
     void setCursorColor(@ColorInt int color) {
-        mCursor.setSupportBackgroundTintList(ColorStateList.valueOf(color));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mCursor.setBackgroundTintList(ColorStateList.valueOf(color));
+        }
     }
 
     void setCursorDrawable(@DrawableRes int res) {
@@ -170,5 +166,4 @@ public class BatEditText extends FrameLayout implements OnCursorMovedListener {
         mEditText.setCursorVisible(!isOnStart);
         mCursor.setVisibility(isOnStart ? VISIBLE : INVISIBLE);
     }
-
 }

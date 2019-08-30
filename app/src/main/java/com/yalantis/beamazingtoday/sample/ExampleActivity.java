@@ -38,13 +38,13 @@ public class ExampleActivity extends AppCompatActivity implements BatListener, O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_example);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
 
         ((TextView) findViewById(R.id.text_title)).setTypeface(TypefaceUtil.getAvenirTypeface(this));
 
-        mRecyclerView = (BatRecyclerView) findViewById(R.id.bat_recycler_view);
+        mRecyclerView = findViewById(R.id.bat_recycler_view);
         mAnimator = new BatItemAnimator();
 
         mRecyclerView.getView().setLayoutManager(new LinearLayoutManager(this));

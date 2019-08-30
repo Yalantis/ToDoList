@@ -3,6 +3,7 @@ package com.yalantis.beamazingtoday.ui.widget;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
+import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
@@ -14,28 +15,19 @@ import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import com.yalantis.beamazingtoday.Constant;
 import com.yalantis.beamazingtoday.R;
-import com.yalantis.beamazingtoday.R2;
 import com.yalantis.beamazingtoday.listeners.AnimationListener;
 import com.yalantis.beamazingtoday.listeners.BatListener;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
-
-/**
- * Created by galata on 15.07.16.
- */
 public class BatRecyclerView extends FrameLayout {
 
-    @BindView(R2.id.recycler_view)
     RecyclerView mRecyclerView;
-    @BindView(R2.id.header_view)
-    BatHeaderView mHeaderView;
-    @BindView(R2.id.view)
+    //BatHeaderView mHeaderView;
     AppCompatImageView mBackground;
 
     public BatRecyclerView(Context context) {
@@ -48,9 +40,10 @@ public class BatRecyclerView extends FrameLayout {
 
     public BatRecyclerView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        LayoutInflater.from(context).inflate(R.layout.bat_recycler_view, this, true);
-        ButterKnife.bind(this);
-
+        View view = LayoutInflater.from(context).inflate(R.layout.bat_recycler_view, this, true);
+        mRecyclerView = view.findViewById(R.id.recycler_view);
+        //mHeaderView = view.findViewById(R2.id.header_view);
+        mBackground = view.findViewById(R.id.view);
         obtainAttributes(context, attrs);
     }
 
@@ -89,76 +82,80 @@ public class BatRecyclerView extends FrameLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        mHeaderView.setAnimationListener(new AnimationListenerImpl());
+        //mHeaderView.setAnimationListener(new AnimationListenerImpl());
     }
 
     public void setAddItemListener(BatListener listener) {
-        mHeaderView.setAddItemListener(listener);
+        //mHeaderView.setAddItemListener(listener);
     }
 
     public void revertAnimation() {
-        mHeaderView.animateDecreasing();
+
+        //mHeaderView.animateDecreasing();
     }
 
     public RecyclerView getView() {
         return mRecyclerView;
     }
 
+
     public void setListBackgroundColor(@ColorInt int color) {
-        mBackground.setSupportBackgroundTintList(ColorStateList.valueOf(color));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mBackground.setBackgroundTintList(ColorStateList.valueOf(color));
+        }
     }
 
     public void setHintColor(@ColorInt int color) {
-        mHeaderView.mEditText.setHintColor(color);
+        //mHeaderView.mEditText.setHintColor(color);
     }
 
     public void setTextColor(@ColorInt int color) {
-        mHeaderView.mEditText.setTextColor(color);
+        //mHeaderView.mEditText.setTextColor(color);
     }
 
     @Deprecated
     public void setCursorColor(@ColorInt int color) {
-        mHeaderView.mEditText.setCursorColor(color);
+        //mHeaderView.mEditText.setCursorColor(color);
     }
 
     public void setCursorDrawable(@DrawableRes int res) {
-        mHeaderView.mEditText.setCursorDrawable(res);
+        //mHeaderView.mEditText.setCursorDrawable(res);
     }
 
     public void setDividerColor(@ColorInt int color) {
-        mHeaderView.setDividerColor(color);
+        //mHeaderView.setDividerColor(color);
     }
 
     public void setDividerVisibility(boolean visible) {
-        mHeaderView.setDividerVisibility(visible);
+        //mHeaderView.setDividerVisibility(visible);
     }
 
     public void setRadioButtonColor(@ColorInt int color) {
-        mHeaderView.setRadioButtonColor(color);
+        //mHeaderView.setRadioButtonColor(color);
     }
 
     public void setRadioButtonSelector(@DrawableRes int drawable) {
-        mHeaderView.setRadioButtonSelector(drawable);
+        //mHeaderView.setRadioButtonSelector(drawable);
     }
 
     public void setPlusColor(@ColorInt int color) {
-        mHeaderView.setPlusColor(color);
+        //mHeaderView.setPlusColor(color);
     }
 
     public void setHint(@StringRes int hint) {
-        mHeaderView.mEditText.setHint(hint);
+        //mHeaderView.mEditText.setHint(hint);
     }
 
     public void setHint(String hint) {
-        mHeaderView.mEditText.setHint(hint);
+        //mHeaderView.mEditText.setHint(hint);
     }
 
     public void setAddButtonColor(@ColorInt int color) {
-        mHeaderView.setAddButtonColor(ColorStateList.valueOf(color));
+       // mHeaderView.setAddButtonColor(ColorStateList.valueOf(color));
     }
 
     public void setAddButtonColor(ColorStateList color) {
-        mHeaderView.setAddButtonColor(color);
+        //mHeaderView.setAddButtonColor(color);
     }
 
     private int getDimen(@DimenRes int res) {
