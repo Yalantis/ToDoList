@@ -1,6 +1,6 @@
 package com.yalantis.beamazingtoday.interfaces;
 
-import android.support.annotation.IntDef;
+import androidx.annotation.IntDef;
 
 /**
  * Created by galata on 22.08.16.

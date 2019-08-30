@@ -1080,6 +1080,7 @@ id forever
 id full_list_item
 id ghost_view
 id group_divider
+id header_view
 id home
 id icon
 id icon_group

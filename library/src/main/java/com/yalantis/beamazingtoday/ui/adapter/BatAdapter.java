@@ -2,12 +2,12 @@ package com.yalantis.beamazingtoday.ui.adapter;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.AppCompatCheckBox;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.widget.AppCompatCheckBox;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +25,6 @@ import com.yalantis.beamazingtoday.ui.animator.BatItemAnimator;
 import com.yalantis.beamazingtoday.util.TypefaceUtil;
 
 import java.util.List;
-
 
 /**
  * Created by galata on 15.07.16.
@@ -183,7 +182,19 @@ public class BatAdapter extends RecyclerView.Adapter<BatAdapter.ViewHolder> impl
         public ViewHolder(View itemView) {
             super(itemView);
             this.rootView = itemView.findViewById(R.id.root);
+            this.rootView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClickItem();
+                }
+            });
             this.textView = itemView.findViewById(R.id.text_view);
+            this.textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClickItem();
+                }
+            });
             this.radioButton = itemView.findViewById(R.id.radio_button);
             this.divider = itemView.findViewById(R.id.divider);
             this.clickeableView = itemView.findViewById(R.id.clickable_view);
@@ -202,8 +213,7 @@ public class BatAdapter extends RecyclerView.Adapter<BatAdapter.ViewHolder> impl
             }
         }
 
-        //@OnClick({R2.id.root, R2.id.text_view})
-        void onClick() {
+        void onClickItem() {
             if (mItemClickListener != null) {
                 BatModel item = (BatModel) radioButton.getTag();
                 mItemClickListener.onClick(item, mItems.indexOf(item));

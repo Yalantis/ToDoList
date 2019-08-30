@@ -7,7 +7,7 @@
     android:background="@drawable/gradient"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
@@ -23,7 +23,7 @@
             android:textColor="@android:color/white"
             android:textSize="20sp" />
 
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
     <com.yalantis.beamazingtoday.ui.widget.BatRecyclerView
         android:id="@+id/bat_recycler_view"

@@ -68,6 +68,7 @@ id cursor
 id divider
 id edit_text
 id full_list_item
+id header_view
 id radio_button
 id recycler_view
 id root

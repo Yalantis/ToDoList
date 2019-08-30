@@ -20,7 +20,7 @@
         android:alpha="0.2"
         android:background="@drawable/background_card" />
 
-    <android.support.v7.widget.AppCompatImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/view"
         android:layout_width="@dimen/recycler_view_width"
         android:layout_height="match_parent"
@@ -28,15 +28,15 @@
         android:layout_marginBottom="@dimen/background_view_margin_top"
         android:layout_marginTop="@dimen/background_view_margin_top"
         android:background="@drawable/recycler_view_background" />
-<!--
+
     <com.yalantis.beamazingtoday.ui.widget.BatHeaderView
         android:id="@+id/header_view"
         android:layout_width="@dimen/recycler_view_width"
         android:layout_height="wrap_content"
         android:visibility="visible"
         android:layout_gravity="center_horizontal" />
--->
-    <android.support.v7.widget.RecyclerView
+
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

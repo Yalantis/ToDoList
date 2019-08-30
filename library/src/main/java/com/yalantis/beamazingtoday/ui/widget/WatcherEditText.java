@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import com.yalantis.beamazingtoday.ui.callback.OnCursorMovedListener;
 
 
-public class WatcherEditText extends android.support.v7.widget.AppCompatEditText {
+public class WatcherEditText extends androidx.appcompat.widget.AppCompatEditText {
 
     private OnCursorMovedListener mListener;
 
