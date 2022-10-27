@@ -229,6 +229,6 @@ P.S. We’re going to publish more awesomeness wrapped in code and a tutorial on
 	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-	THE SOFTWARE.
+	THE SOFTWARE. This is a extra line added to the license doucment.
 
 	## This is a dummy line just to change something in my local repository.
